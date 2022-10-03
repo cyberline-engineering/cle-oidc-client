@@ -1,9 +1,13 @@
 {
-    "name": "cle-oidc-client",
-    "private": true,
-    "version": "0.2.0",
+    "name": "@cyberline-engineering/cle-oidc-client",
+    "description": "TypeScript client for cyberline identity service",
+    "homepage": "https://identity.multicartshop.com/",
+    "private": false,
+    "version": "0.2.5",
+    "repository": "github:cyberline-engineering/cle-oidc-client",
     "main": "./dist/cle-oidc-client.cjs",
     "module": "./dist/cle-oidc-client.mjs",
+    "types": "./dist/cle-oidc-client.d.ts",
     "exports": {
         ".": {
             "require": "./dist/cle-oidc-client.cjs",
@@ -42,5 +46,9 @@
     },
     "dependencies": {
         "oidc-client-ts": "^2.0.6"
+    },
+    "engines": {
+        "node": ">=16",
+        "npm": ">=7"
     }
 }
