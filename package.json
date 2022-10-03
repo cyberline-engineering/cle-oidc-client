@@ -1,0 +1,46 @@
+{
+    "name": "cle-oidc-client",
+    "private": true,
+    "version": "0.2.0",
+    "main": "./dist/cle-oidc-client.cjs",
+    "module": "./dist/cle-oidc-client.mjs",
+    "exports": {
+        ".": {
+            "require": "./dist/cle-oidc-client.cjs",
+            "import": "./dist/cle-oidc-client.mjs"
+        }
+    },
+    "scripts": {
+        "dev": "vite --host",
+        "build": "tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts",
+        "test": "cross-env GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:8888 NODE_TLS_REJECT_UNAUTHORIZED=0 jest --forceExit --runInBand",
+        "test:coverage": "jest --runInBand --coverage",
+        "lint": "eslint . --ext .ts",
+        "format": "prettier . --write"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.1.1",
+        "@types/jsdom": "^20.0.0",
+        "@types/node": "^18.8.0",
+        "@typescript-eslint/eslint-plugin": "^5.38.1",
+        "@typescript-eslint/parser": "^5.38.1",
+        "cross-env": "^7.0.3",
+        "cross-fetch": "^3.1.5",
+        "debugger-is-attached": "^1.2.0",
+        "dotenv": "^16.0.3",
+        "dts-bundle-generator": "^6.13.0",
+        "eslint": "^8.24.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "global-agent": "^3.0.0",
+        "jest": "^29.1.2",
+        "prettier": "^2.7.1",
+        "ts-jest": "^29.0.3",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.8.4",
+        "vite": "^3.1.4"
+    },
+    "dependencies": {
+        "oidc-client-ts": "^2.0.6"
+    }
+}
