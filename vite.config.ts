@@ -1,6 +1,7 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 import packageJson from './package.json';
+import dts from 'vite-plugin-dts';
 
 const getPackageName = () => {
     return packageJson.name.split('/').slice(-1)[0];
@@ -31,4 +32,18 @@ module.exports = defineConfig(() => ({
         },
         sourcemap: true,
     },
+    plugins: [
+        dts({
+            outputDir: ['dist' /*, 'types'*/],
+            // include: ['src/index.ts'],
+            // exclude: ['src/ignore'],
+            // aliasesExclude: [/^@components/],
+            copyDtsFiles: false,
+            staticImport: true,
+            skipDiagnostics: false,
+            logDiagnostics: true,
+            rollupTypes: true,
+            insertTypesEntry: true,
+        }),
+    ],
 }));

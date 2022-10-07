@@ -1,5 +1,5 @@
 var q = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
-function ve(e) {
+function ye(e) {
   var t = e.default;
   if (typeof t == "function") {
     var r = function() {
@@ -18,201 +18,203 @@ function ve(e) {
     });
   }), r;
 }
-function Se(e) {
+function be(e) {
   throw new Error('Could not dynamically require "' + e + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
-var W = { exports: {} };
-const ye = {}, be = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+var D = { exports: {} };
+const ke = {}, Ee = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: ye
-}, Symbol.toStringTag, { value: "Module" })), ke = /* @__PURE__ */ ve(be);
-(function(e, t) {
-  (function(r, s) {
-    e.exports = s();
-  })(q, function() {
-    var r = r || function(s, i) {
-      var n;
-      if (typeof window < "u" && window.crypto && (n = window.crypto), typeof self < "u" && self.crypto && (n = self.crypto), typeof globalThis < "u" && globalThis.crypto && (n = globalThis.crypto), !n && typeof window < "u" && window.msCrypto && (n = window.msCrypto), !n && typeof q < "u" && q.crypto && (n = q.crypto), !n && typeof Se == "function")
-        try {
-          n = ke;
-        } catch {
-        }
-      var o = function() {
-        if (n) {
-          if (typeof n.getRandomValues == "function")
-            try {
-              return n.getRandomValues(new Uint32Array(1))[0];
-            } catch {
+  default: ke
+}, Symbol.toStringTag, { value: "Module" })), xe = /* @__PURE__ */ ye(Ee);
+var Y;
+function $() {
+  return Y || (Y = 1, function(e, t) {
+    (function(r, s) {
+      e.exports = s();
+    })(q, function() {
+      var r = r || function(s, i) {
+        var n;
+        if (typeof window < "u" && window.crypto && (n = window.crypto), typeof self < "u" && self.crypto && (n = self.crypto), typeof globalThis < "u" && globalThis.crypto && (n = globalThis.crypto), !n && typeof window < "u" && window.msCrypto && (n = window.msCrypto), !n && typeof q < "u" && q.crypto && (n = q.crypto), !n && typeof be == "function")
+          try {
+            n = xe;
+          } catch {
+          }
+        var o = function() {
+          if (n) {
+            if (typeof n.getRandomValues == "function")
+              try {
+                return n.getRandomValues(new Uint32Array(1))[0];
+              } catch {
+              }
+            if (typeof n.randomBytes == "function")
+              try {
+                return n.randomBytes(4).readInt32LE();
+              } catch {
+              }
+          }
+          throw new Error("Native crypto module could not be used to get secure random number.");
+        }, c = Object.create || function() {
+          function a() {
+          }
+          return function(d) {
+            var _;
+            return a.prototype = d, _ = new a(), a.prototype = null, _;
+          };
+        }(), l = {}, u = l.lib = {}, p = u.Base = function() {
+          return {
+            extend: function(a) {
+              var d = c(this);
+              return a && d.mixIn(a), (!d.hasOwnProperty("init") || this.init === d.init) && (d.init = function() {
+                d.$super.init.apply(this, arguments);
+              }), d.init.prototype = d, d.$super = this, d;
+            },
+            create: function() {
+              var a = this.extend();
+              return a.init.apply(a, arguments), a;
+            },
+            init: function() {
+            },
+            mixIn: function(a) {
+              for (var d in a)
+                a.hasOwnProperty(d) && (this[d] = a[d]);
+              a.hasOwnProperty("toString") && (this.toString = a.toString);
+            },
+            clone: function() {
+              return this.init.prototype.extend(this);
             }
-          if (typeof n.randomBytes == "function")
-            try {
-              return n.randomBytes(4).readInt32LE();
-            } catch {
-            }
-        }
-        throw new Error("Native crypto module could not be used to get secure random number.");
-      }, c = Object.create || function() {
-        function a() {
-        }
-        return function(d) {
-          var _;
-          return a.prototype = d, _ = new a(), a.prototype = null, _;
-        };
-      }(), l = {}, u = l.lib = {}, p = u.Base = function() {
-        return {
-          extend: function(a) {
-            var d = c(this);
-            return a && d.mixIn(a), (!d.hasOwnProperty("init") || this.init === d.init) && (d.init = function() {
-              d.$super.init.apply(this, arguments);
-            }), d.init.prototype = d, d.$super = this, d;
+          };
+        }(), g = u.WordArray = p.extend({
+          init: function(a, d) {
+            a = this.words = a || [], d != i ? this.sigBytes = d : this.sigBytes = a.length * 4;
           },
-          create: function() {
-            var a = this.extend();
-            return a.init.apply(a, arguments), a;
+          toString: function(a) {
+            return (a || w).stringify(this);
           },
-          init: function() {
+          concat: function(a) {
+            var d = this.words, _ = a.words, m = this.sigBytes, y = a.sigBytes;
+            if (this.clamp(), m % 4)
+              for (var k = 0; k < y; k++) {
+                var T = _[k >>> 2] >>> 24 - k % 4 * 8 & 255;
+                d[m + k >>> 2] |= T << 24 - (m + k) % 4 * 8;
+              }
+            else
+              for (var x = 0; x < y; x += 4)
+                d[m + x >>> 2] = _[x >>> 2];
+            return this.sigBytes += y, this;
           },
-          mixIn: function(a) {
-            for (var d in a)
-              a.hasOwnProperty(d) && (this[d] = a[d]);
-            a.hasOwnProperty("toString") && (this.toString = a.toString);
+          clamp: function() {
+            var a = this.words, d = this.sigBytes;
+            a[d >>> 2] &= 4294967295 << 32 - d % 4 * 8, a.length = s.ceil(d / 4);
           },
           clone: function() {
-            return this.init.prototype.extend(this);
+            var a = p.clone.call(this);
+            return a.words = this.words.slice(0), a;
+          },
+          random: function(a) {
+            for (var d = [], _ = 0; _ < a; _ += 4)
+              d.push(o());
+            return new g.init(d, a);
           }
-        };
-      }(), g = u.WordArray = p.extend({
-        init: function(a, d) {
-          a = this.words = a || [], d != i ? this.sigBytes = d : this.sigBytes = a.length * 4;
-        },
-        toString: function(a) {
-          return (a || w).stringify(this);
-        },
-        concat: function(a) {
-          var d = this.words, _ = a.words, m = this.sigBytes, y = a.sigBytes;
-          if (this.clamp(), m % 4)
-            for (var k = 0; k < y; k++) {
-              var T = _[k >>> 2] >>> 24 - k % 4 * 8 & 255;
-              d[m + k >>> 2] |= T << 24 - (m + k) % 4 * 8;
+        }), S = l.enc = {}, w = S.Hex = {
+          stringify: function(a) {
+            for (var d = a.words, _ = a.sigBytes, m = [], y = 0; y < _; y++) {
+              var k = d[y >>> 2] >>> 24 - y % 4 * 8 & 255;
+              m.push((k >>> 4).toString(16)), m.push((k & 15).toString(16));
             }
-          else
-            for (var x = 0; x < y; x += 4)
-              d[m + x >>> 2] = _[x >>> 2];
-          return this.sigBytes += y, this;
-        },
-        clamp: function() {
-          var a = this.words, d = this.sigBytes;
-          a[d >>> 2] &= 4294967295 << 32 - d % 4 * 8, a.length = s.ceil(d / 4);
-        },
-        clone: function() {
-          var a = p.clone.call(this);
-          return a.words = this.words.slice(0), a;
-        },
-        random: function(a) {
-          for (var d = [], _ = 0; _ < a; _ += 4)
-            d.push(o());
-          return new g.init(d, a);
-        }
-      }), S = l.enc = {}, w = S.Hex = {
-        stringify: function(a) {
-          for (var d = a.words, _ = a.sigBytes, m = [], y = 0; y < _; y++) {
-            var k = d[y >>> 2] >>> 24 - y % 4 * 8 & 255;
-            m.push((k >>> 4).toString(16)), m.push((k & 15).toString(16));
+            return m.join("");
+          },
+          parse: function(a) {
+            for (var d = a.length, _ = [], m = 0; m < d; m += 2)
+              _[m >>> 3] |= parseInt(a.substr(m, 2), 16) << 24 - m % 8 * 4;
+            return new g.init(_, d / 2);
           }
-          return m.join("");
-        },
-        parse: function(a) {
-          for (var d = a.length, _ = [], m = 0; m < d; m += 2)
-            _[m >>> 3] |= parseInt(a.substr(m, 2), 16) << 24 - m % 8 * 4;
-          return new g.init(_, d / 2);
-        }
-      }, b = S.Latin1 = {
-        stringify: function(a) {
-          for (var d = a.words, _ = a.sigBytes, m = [], y = 0; y < _; y++) {
-            var k = d[y >>> 2] >>> 24 - y % 4 * 8 & 255;
-            m.push(String.fromCharCode(k));
+        }, b = S.Latin1 = {
+          stringify: function(a) {
+            for (var d = a.words, _ = a.sigBytes, m = [], y = 0; y < _; y++) {
+              var k = d[y >>> 2] >>> 24 - y % 4 * 8 & 255;
+              m.push(String.fromCharCode(k));
+            }
+            return m.join("");
+          },
+          parse: function(a) {
+            for (var d = a.length, _ = [], m = 0; m < d; m++)
+              _[m >>> 2] |= (a.charCodeAt(m) & 255) << 24 - m % 4 * 8;
+            return new g.init(_, d);
           }
-          return m.join("");
-        },
-        parse: function(a) {
-          for (var d = a.length, _ = [], m = 0; m < d; m++)
-            _[m >>> 2] |= (a.charCodeAt(m) & 255) << 24 - m % 4 * 8;
-          return new g.init(_, d);
-        }
-      }, h = S.Utf8 = {
-        stringify: function(a) {
-          try {
-            return decodeURIComponent(escape(b.stringify(a)));
-          } catch {
-            throw new Error("Malformed UTF-8 data");
+        }, h = S.Utf8 = {
+          stringify: function(a) {
+            try {
+              return decodeURIComponent(escape(b.stringify(a)));
+            } catch {
+              throw new Error("Malformed UTF-8 data");
+            }
+          },
+          parse: function(a) {
+            return b.parse(unescape(encodeURIComponent(a)));
           }
-        },
-        parse: function(a) {
-          return b.parse(unescape(encodeURIComponent(a)));
-        }
-      }, v = u.BufferedBlockAlgorithm = p.extend({
-        reset: function() {
-          this._data = new g.init(), this._nDataBytes = 0;
-        },
-        _append: function(a) {
-          typeof a == "string" && (a = h.parse(a)), this._data.concat(a), this._nDataBytes += a.sigBytes;
-        },
-        _process: function(a) {
-          var d, _ = this._data, m = _.words, y = _.sigBytes, k = this.blockSize, T = k * 4, x = y / T;
-          a ? x = s.ceil(x) : x = s.max((x | 0) - this._minBufferSize, 0);
-          var O = x * k, I = s.min(O * 4, y);
-          if (O) {
-            for (var N = 0; N < O; N += k)
-              this._doProcessBlock(m, N);
-            d = m.splice(0, O), _.sigBytes -= I;
+        }, v = u.BufferedBlockAlgorithm = p.extend({
+          reset: function() {
+            this._data = new g.init(), this._nDataBytes = 0;
+          },
+          _append: function(a) {
+            typeof a == "string" && (a = h.parse(a)), this._data.concat(a), this._nDataBytes += a.sigBytes;
+          },
+          _process: function(a) {
+            var d, _ = this._data, m = _.words, y = _.sigBytes, k = this.blockSize, T = k * 4, x = y / T;
+            a ? x = s.ceil(x) : x = s.max((x | 0) - this._minBufferSize, 0);
+            var O = x * k, I = s.min(O * 4, y);
+            if (O) {
+              for (var N = 0; N < O; N += k)
+                this._doProcessBlock(m, N);
+              d = m.splice(0, O), _.sigBytes -= I;
+            }
+            return new g.init(d, I);
+          },
+          clone: function() {
+            var a = p.clone.call(this);
+            return a._data = this._data.clone(), a;
+          },
+          _minBufferSize: 0
+        });
+        u.Hasher = v.extend({
+          cfg: p.extend(),
+          init: function(a) {
+            this.cfg = this.cfg.extend(a), this.reset();
+          },
+          reset: function() {
+            v.reset.call(this), this._doReset();
+          },
+          update: function(a) {
+            return this._append(a), this._process(), this;
+          },
+          finalize: function(a) {
+            a && this._append(a);
+            var d = this._doFinalize();
+            return d;
+          },
+          blockSize: 16,
+          _createHelper: function(a) {
+            return function(d, _) {
+              return new a.init(_).finalize(d);
+            };
+          },
+          _createHmacHelper: function(a) {
+            return function(d, _) {
+              return new E.HMAC.init(a, _).finalize(d);
+            };
           }
-          return new g.init(d, I);
-        },
-        clone: function() {
-          var a = p.clone.call(this);
-          return a._data = this._data.clone(), a;
-        },
-        _minBufferSize: 0
-      });
-      u.Hasher = v.extend({
-        cfg: p.extend(),
-        init: function(a) {
-          this.cfg = this.cfg.extend(a), this.reset();
-        },
-        reset: function() {
-          v.reset.call(this), this._doReset();
-        },
-        update: function(a) {
-          return this._append(a), this._process(), this;
-        },
-        finalize: function(a) {
-          a && this._append(a);
-          var d = this._doFinalize();
-          return d;
-        },
-        blockSize: 16,
-        _createHelper: function(a) {
-          return function(d, _) {
-            return new a.init(_).finalize(d);
-          };
-        },
-        _createHmacHelper: function(a) {
-          return function(d, _) {
-            return new E.HMAC.init(a, _).finalize(d);
-          };
-        }
-      });
-      var E = l.algo = {};
-      return l;
-    }(Math);
-    return r;
-  });
-})(W);
-const Ee = W.exports;
-var ie = { exports: {} };
+        });
+        var E = l.algo = {};
+        return l;
+      }(Math);
+      return r;
+    });
+  }(D)), D.exports;
+}
+var Te = $(), oe = { exports: {} };
 (function(e, t) {
   (function(r, s) {
-    e.exports = s(W.exports);
+    e.exports = s($());
   })(q, function(r) {
     return function(s) {
       var i = r, n = i.lib, o = n.WordArray, c = n.Hasher, l = i.algo, u = [], p = [];
@@ -241,8 +243,8 @@ var ie = { exports: {} };
               var x = g[T - 15], O = (x << 25 | x >>> 7) ^ (x << 14 | x >>> 18) ^ x >>> 3, I = g[T - 2], N = (I << 15 | I >>> 17) ^ (I << 13 | I >>> 19) ^ I >>> 10;
               g[T] = O + g[T - 7] + N + g[T - 16];
             }
-            var F = _ & m ^ ~_ & y, pe = v & E ^ v & a ^ E & a, fe = (v << 30 | v >>> 2) ^ (v << 19 | v >>> 13) ^ (v << 10 | v >>> 22), we = (_ << 26 | _ >>> 6) ^ (_ << 21 | _ >>> 11) ^ (_ << 7 | _ >>> 25), Q = k + we + F + p[T] + g[T], me = fe + pe;
-            k = y, y = m, m = _, _ = d + Q | 0, d = a, a = E, E = v, v = Q + me | 0;
+            var F = _ & m ^ ~_ & y, we = v & E ^ v & a ^ E & a, me = (v << 30 | v >>> 2) ^ (v << 19 | v >>> 13) ^ (v << 10 | v >>> 22), ve = (_ << 26 | _ >>> 6) ^ (_ << 21 | _ >>> 11) ^ (_ << 7 | _ >>> 25), X = k + ve + F + p[T] + g[T], Se = me + we;
+            k = y, y = m, m = _, _ = d + X | 0, d = a, a = E, E = v, v = X + Se | 0;
           }
           h[0] = h[0] + v | 0, h[1] = h[1] + E | 0, h[2] = h[2] + a | 0, h[3] = h[3] + d | 0, h[4] = h[4] + _ | 0, h[5] = h[5] + m | 0, h[6] = h[6] + y | 0, h[7] = h[7] + k | 0;
         },
@@ -258,12 +260,12 @@ var ie = { exports: {} };
       i.SHA256 = c._createHelper(S), i.HmacSHA256 = c._createHmacHelper(S);
     }(Math), r.SHA256;
   });
-})(ie);
-const xe = ie.exports;
-var ne = { exports: {} };
+})(oe);
+const Re = oe.exports;
+var ae = { exports: {} };
 (function(e, t) {
   (function(r, s) {
-    e.exports = s(W.exports);
+    e.exports = s($());
   })(q, function(r) {
     return function() {
       var s = r, i = s.lib, n = i.WordArray, o = s.enc;
@@ -306,30 +308,30 @@ var ne = { exports: {} };
       }
     }(), r.enc.Base64;
   });
-})(ne);
-const X = ne.exports;
-var oe = { exports: {} };
+})(ae);
+const Z = ae.exports;
+var ce = { exports: {} };
 (function(e, t) {
   (function(r, s) {
-    e.exports = s(W.exports);
+    e.exports = s($());
   })(q, function(r) {
     return r.enc.Utf8;
   });
-})(oe);
-const Te = oe.exports;
-function D(e) {
+})(ce);
+const Ie = ce.exports;
+function L(e) {
   this.message = e;
 }
-D.prototype = new Error(), D.prototype.name = "InvalidCharacterError";
-var Y = typeof window < "u" && window.atob && window.atob.bind(window) || function(e) {
+L.prototype = new Error(), L.prototype.name = "InvalidCharacterError";
+var ee = typeof window < "u" && window.atob && window.atob.bind(window) || function(e) {
   var t = String(e).replace(/=+$/, "");
   if (t.length % 4 == 1)
-    throw new D("'atob' failed: The string to be decoded is not correctly encoded.");
+    throw new L("'atob' failed: The string to be decoded is not correctly encoded.");
   for (var r, s, i = 0, n = 0, o = ""; s = t.charAt(n++); ~s && (r = i % 4 ? 64 * r + s : s, i++ % 4) ? o += String.fromCharCode(255 & r >> (-2 * i & 6)) : 0)
     s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(s);
   return o;
 };
-function Re(e) {
+function Ce(e) {
   var t = e.replace(/-/g, "+").replace(/_/g, "/");
   switch (t.length % 4) {
     case 0:
@@ -345,30 +347,30 @@ function Re(e) {
   }
   try {
     return function(r) {
-      return decodeURIComponent(Y(r).replace(/(.)/g, function(s, i) {
+      return decodeURIComponent(ee(r).replace(/(.)/g, function(s, i) {
         var n = i.charCodeAt(0).toString(16).toUpperCase();
         return n.length < 2 && (n = "0" + n), "%" + n;
       }));
     }(t);
   } catch {
-    return Y(t);
+    return ee(t);
   }
 }
-function B(e) {
+function W(e) {
   this.message = e;
 }
-function Ie(e, t) {
+function Ue(e, t) {
   if (typeof e != "string")
-    throw new B("Invalid token specified");
+    throw new W("Invalid token specified");
   var r = (t = t || {}).header === !0 ? 0 : 1;
   try {
-    return JSON.parse(Re(e.split(".")[r]));
+    return JSON.parse(Ce(e.split(".")[r]));
   } catch (s) {
-    throw new B("Invalid token specified: " + s.message);
+    throw new W("Invalid token specified: " + s.message);
   }
 }
-B.prototype = new Error(), B.prototype.name = "InvalidTokenError";
-var Ce = {
+W.prototype = new Error(), W.prototype.name = "InvalidTokenError";
+var Pe = {
   debug: () => {
   },
   info: () => {
@@ -377,10 +379,10 @@ var Ce = {
   },
   error: () => {
   }
-}, C, U, $ = /* @__PURE__ */ ((e) => (e[e.NONE = 0] = "NONE", e[e.ERROR = 1] = "ERROR", e[e.WARN = 2] = "WARN", e[e.INFO = 3] = "INFO", e[e.DEBUG = 4] = "DEBUG", e))($ || {});
+}, C, U, B = /* @__PURE__ */ ((e) => (e[e.NONE = 0] = "NONE", e[e.ERROR = 1] = "ERROR", e[e.WARN = 2] = "WARN", e[e.INFO = 3] = "INFO", e[e.DEBUG = 4] = "DEBUG", e))(B || {});
 ((e) => {
   function t() {
-    C = 3, U = Ce;
+    C = 3, U = Pe;
   }
   e.reset = t;
   function r(i) {
@@ -393,7 +395,7 @@ var Ce = {
     U = i;
   }
   e.setLogger = s;
-})($ || ($ = {}));
+})(B || (B = {}));
 var f = class {
   constructor(e) {
     this._name = e;
@@ -438,13 +440,13 @@ var f = class {
     C >= 1 && U.error(f._format(e), ...t);
   }
 };
-$.reset();
-var Ue = "10000000-1000-4000-8000-100000000000", P = class {
+B.reset();
+var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   static _randomWord() {
-    return Ee.lib.WordArray.random(1).words[0];
+    return Te.lib.WordArray.random(1).words[0];
   }
   static generateUUIDv4() {
-    return Ue.replace(
+    return Oe.replace(
       /[018]/g,
       (t) => (+t ^ P._randomWord() & 15 >> +t / 4).toString(16)
     ).replace(/-/g, "");
@@ -454,15 +456,15 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   }
   static generateCodeChallenge(e) {
     try {
-      const t = xe(e);
-      return X.stringify(t).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+      const t = Re(e);
+      return Z.stringify(t).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
     } catch (t) {
       throw f.error("CryptoUtils.generateCodeChallenge", t), t;
     }
   }
   static generateBasicAuth(e, t) {
-    const r = Te.parse([e, t].join(":"));
-    return X.stringify(r);
+    const r = Ie.parse([e, t].join(":"));
+    return Z.stringify(r);
   }
 }, A = class {
   constructor(e) {
@@ -480,15 +482,15 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     for (const t of this._callbacks)
       t(...e);
   }
-}, L = class {
+}, z = class {
   static decode(e) {
     try {
-      return Ie(e);
+      return Ue(e);
     } catch (t) {
       throw f.error("JwtUtils.decode", t), t;
     }
   }
-}, Z = class {
+}, te = class {
   static center({ ...e }) {
     var t, r, s;
     return e.width == null && (e.width = (t = [800, 720, 600, 480].find((i) => i <= window.outerWidth / 1.618)) != null ? t : 360), (r = e.left) != null || (e.left = Math.max(0, Math.round(window.screenX + (window.outerWidth - e.width) / 2))), e.height != null && ((s = e.top) != null || (e.top = Math.max(0, Math.round(window.screenY + (window.outerHeight - e.height) / 2)))), e;
@@ -524,7 +526,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   cancel() {
     this._logger.create("cancel"), this._timerHandle && (clearInterval(this._timerHandle), this._timerHandle = null);
   }
-}, z = class {
+}, J = class {
   static readParams(e, t = "query") {
     if (!e)
       throw new TypeError("Invalid URL");
@@ -538,11 +540,11 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       throw f.error("ErrorResponse", "No error passed"), new Error("No error passed");
     this.error = e.error, this.error_description = (r = e.error_description) != null ? r : null, this.error_uri = (s = e.error_uri) != null ? s : null, this.state = e.userState, this.session_state = (i = e.session_state) != null ? i : null;
   }
-}, K = class extends Error {
+}, V = class extends Error {
   constructor(e) {
     super(e), this.name = "ErrorTimeout";
   }
-}, Pe = class {
+}, Ae = class {
   constructor(e) {
     this._logger = new f("AccessTokenEvents"), this._expiringTimer = new R("Access token expiring"), this._expiredTimer = new R("Access token expired"), this._expiringNotificationTimeInSeconds = e.expiringNotificationTimeInSeconds;
   }
@@ -575,7 +577,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   removeAccessTokenExpired(e) {
     this._expiredTimer.removeHandler(e);
   }
-}, Oe = class {
+}, Ne = class {
   constructor(e, t, r, s, i) {
     this._callback = e, this._client_id = t, this._intervalInSeconds = s, this._stopOnError = i, this._logger = new f("CheckSessionIFrame"), this._timer = null, this._session_state = null, this._message = (o) => {
       o.origin === this._frame_origin && o.source === this._frame.contentWindow && (o.data === "error" ? (this._logger.error("error message from check session op iframe"), this._stopOnError && this.stop()) : o.data === "changed" ? (this._logger.debug("changed message from check session op iframe"), this.stop(), this._callback()) : this._logger.debug(o.data + " message from check session op iframe"));
@@ -602,7 +604,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   stop() {
     this._logger.create("stop"), this._session_state = null, this._timer && (clearInterval(this._timer), this._timer = null);
   }
-}, ae = class {
+}, le = class {
   constructor() {
     this._logger = new f("InMemoryWebStorage"), this._data = {};
   }
@@ -624,7 +626,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   key(e) {
     return Object.getOwnPropertyNames(this._data)[e];
   }
-}, V = class {
+}, G = class {
   constructor(e = [], t = null) {
     this._jwtHandler = t, this._logger = new f("JsonService"), this._contentTypes = [], this._contentTypes.push(...e, "application/json"), t && this._contentTypes.push("application/jwt");
   }
@@ -639,7 +641,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
         signal: i.signal
       });
     } catch (o) {
-      throw o instanceof DOMException && o.name === "AbortError" ? new K("Network timed out") : o;
+      throw o instanceof DOMException && o.name === "AbortError" ? new V("Network timed out") : o;
     } finally {
       clearTimeout(n);
     }
@@ -704,9 +706,9 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       throw n.error("Error from server:", p), p.error ? new M(p, t) : new Error(`${c.statusText} (${c.status}): ${JSON.stringify(p)}`);
     return p;
   }
-}, Ae = class {
+}, qe = class {
   constructor(e) {
-    this._settings = e, this._logger = new f("MetadataService"), this._jsonService = new V(["application/jwk-set+json"]), this._signingKeys = null, this._metadata = null, this._metadataUrl = this._settings.metadataUrl, this._settings.signingKeys && (this._logger.debug("using signingKeys from settings"), this._signingKeys = this._settings.signingKeys), this._settings.metadata && (this._logger.debug("using metadata from settings"), this._metadata = this._settings.metadata);
+    this._settings = e, this._logger = new f("MetadataService"), this._jsonService = new G(["application/jwk-set+json"]), this._signingKeys = null, this._metadata = null, this._metadataUrl = this._settings.metadataUrl, this._settings.signingKeys && (this._logger.debug("using signingKeys from settings"), this._signingKeys = this._settings.signingKeys), this._settings.metadata && (this._logger.debug("using metadata from settings"), this._metadata = this._settings.metadata);
   }
   resetSigningKeys() {
     this._signingKeys = null;
@@ -767,7 +769,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       throw e.throw(new Error("Missing keys on keyset")), null;
     return this._signingKeys = r.keys, this._signingKeys;
   }
-}, ce = class {
+}, de = class {
   constructor({ prefix: e = "oidc.", store: t = localStorage } = {}) {
     this._logger = new f("WebStorageStateStore"), this._store = t, this._prefix = e;
   }
@@ -793,7 +795,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     }
     return Promise.resolve(e);
   }
-}, Ne = "code", qe = "openid", Me = "client_secret_post", He = "query", je = 60 * 15, We = 60 * 5, le = class {
+}, Me = "code", He = "openid", je = "client_secret_post", We = "query", Be = 60 * 15, $e = 60 * 5, he = class {
   constructor({
     authority: e,
     metadataUrl: t,
@@ -802,22 +804,22 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     metadataSeed: i,
     client_id: n,
     client_secret: o,
-    response_type: c = Ne,
-    scope: l = qe,
+    response_type: c = Me,
+    scope: l = He,
     redirect_uri: u,
     post_logout_redirect_uri: p,
-    client_authentication: g = Me,
+    client_authentication: g = je,
     prompt: S,
     display: w,
     max_age: b,
     ui_locales: h,
     acr_values: v,
     resource: E,
-    response_mode: a = He,
+    response_mode: a = We,
     filterProtocolClaims: d = !0,
     loadUserInfo: _ = !1,
-    staleStateAgeInSeconds: m = je,
-    clockSkewInSeconds: y = We,
+    staleStateAgeInSeconds: m = Be,
+    clockSkewInSeconds: y = $e,
     userInfoJwtIssuer: k = "OP",
     mergeClaims: T = !1,
     stateStore: x,
@@ -828,22 +830,22 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     if (this.authority = e, t ? this.metadataUrl = t : (this.metadataUrl = e, e && (this.metadataUrl.endsWith("/") || (this.metadataUrl += "/"), this.metadataUrl += ".well-known/openid-configuration")), this.metadata = r, this.metadataSeed = i, this.signingKeys = s, this.client_id = n, this.client_secret = o, this.response_type = c, this.scope = l, this.redirect_uri = u, this.post_logout_redirect_uri = p, this.client_authentication = g, this.prompt = S, this.display = w, this.max_age = b, this.ui_locales = h, this.acr_values = v, this.resource = E, this.response_mode = a, this.filterProtocolClaims = !!d, this.loadUserInfo = !!_, this.staleStateAgeInSeconds = m, this.clockSkewInSeconds = y, this.userInfoJwtIssuer = k, this.mergeClaims = !!T, this.refreshTokenCredentials = O, x)
       this.stateStore = x;
     else {
-      const F = typeof window < "u" ? window.localStorage : new ae();
-      this.stateStore = new ce({ store: F });
+      const F = typeof window < "u" ? window.localStorage : new le();
+      this.stateStore = new de({ store: F });
     }
     this.extraQueryParams = I, this.extraTokenParams = N;
   }
-}, Be = class {
+}, Fe = class {
   constructor(e) {
     this._metadataService = e, this._logger = new f("UserInfoService"), this._getClaimsFromJwt = async (t) => {
       const r = this._logger.create("_getClaimsFromJwt");
       try {
-        const s = L.decode(t);
+        const s = z.decode(t);
         return r.debug("JWT decoding successful"), s;
       } catch (s) {
         throw r.error("Error parsing JWT response"), s;
       }
-    }, this._jsonService = new V(void 0, this._getClaimsFromJwt);
+    }, this._jsonService = new G(void 0, this._getClaimsFromJwt);
   }
   async getClaims(e) {
     const t = this._logger.create("getClaims");
@@ -853,9 +855,9 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     const s = await this._jsonService.getJson(r, { token: e });
     return t.debug("got claims", s), s;
   }
-}, de = class {
+}, ge = class {
   constructor(e, t) {
-    this._settings = e, this._metadataService = t, this._logger = new f("TokenClient"), this._jsonService = new V();
+    this._settings = e, this._metadataService = t, this._logger = new f("TokenClient"), this._jsonService = new G();
   }
   async exchangeCode({
     grant_type: e = "authorization_code",
@@ -925,7 +927,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       o != null && i.set(n, o);
     i.set("client_id", this._settings.client_id), this._settings.client_secret && i.set("client_secret", this._settings.client_secret), await this._jsonService.postForm(s, { body: i }), r.debug("got response");
   }
-}, $e = [
+}, De = [
   "iss",
   "aud",
   "exp",
@@ -938,9 +940,9 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   "amr",
   "azp",
   "at_hash"
-], Fe = class {
+], Le = class {
   constructor(e, t) {
-    this._settings = e, this._metadataService = t, this._logger = new f("ResponseValidator"), this._userInfoService = new Be(this._metadataService), this._tokenClient = new de(this._settings, this._metadataService);
+    this._settings = e, this._metadataService = t, this._logger = new f("ResponseValidator"), this._userInfoService = new Fe(this._metadataService), this._tokenClient = new ge(this._settings, this._metadataService);
   }
   async validateSigninResponse(e, t) {
     const r = this._logger.create("validateSigninResponse");
@@ -987,7 +989,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   _filterProtocolClaims(e) {
     const t = { ...e };
     if (this._settings.filterProtocolClaims)
-      for (const r of $e)
+      for (const r of De)
         delete t[r];
     return t;
   }
@@ -1011,9 +1013,9 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     var r;
     const s = this._logger.create("_validateIdTokenAttributes");
     s.debug("decoding ID Token JWT");
-    const i = L.decode((r = e.id_token) != null ? r : "");
+    const i = z.decode((r = e.id_token) != null ? r : "");
     if (i.sub || s.throw(new Error("ID Token is missing a subject claim")), t) {
-      const n = L.decode(t);
+      const n = z.decode(t);
       n.sub !== i.sub && s.throw(new Error("sub in id_token does not match current sub")), n.auth_time && n.auth_time !== i.auth_time && s.throw(new Error("auth_time in id_token does not match original auth_time")), n.azp && n.azp !== i.azp && s.throw(new Error("azp in id_token does not match original azp")), !n.azp && i.azp && s.throw(new Error("azp not in id_token, but present in original id_token"));
     }
     e.profile = i;
@@ -1051,7 +1053,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       l && (r.debug("removed item for key:", o), e.remove(o));
     }
   }
-}, G = class extends H {
+}, Q = class extends H {
   constructor(e) {
     super(e), e.code_verifier === !0 ? this.code_verifier = P.generateCodeVerifier() : e.code_verifier && (this.code_verifier = e.code_verifier), this.code_verifier && (this.code_challenge = P.generateCodeChallenge(this.code_verifier)), this.authority = e.authority, this.client_id = e.client_id, this.redirect_uri = e.redirect_uri, this.scope = e.scope, this.client_secret = e.client_secret, this.extraTokenParams = e.extraTokenParams, this.response_mode = e.response_mode, this.skipUserInfo = e.skipUserInfo;
   }
@@ -1075,9 +1077,9 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   static fromStorageString(e) {
     f.createStatic("SigninState", "fromStorageString");
     const t = JSON.parse(e);
-    return new G(t);
+    return new Q(t);
   }
-}, De = class {
+}, ze = class {
   constructor({
     url: e,
     authority: t,
@@ -1107,7 +1109,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       throw this._logger.error("ctor: No scope passed"), new Error("scope");
     if (!t)
       throw this._logger.error("ctor: No authority passed"), new Error("authority");
-    this.state = new G({
+    this.state = new Q({
       data: o,
       request_type: l,
       code_verifier: !0,
@@ -1126,7 +1128,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       E != null && h.searchParams.append(v, E.toString());
     this.url = h.href;
   }
-}, Le = "openid", ee = class {
+}, Je = "openid", re = class {
   constructor(e) {
     this.access_token = "", this.token_type = "", this.profile = {}, this.state = e.get("state"), this.session_state = e.get("session_state"), this.error = e.get("error"), this.error_description = e.get("error_description"), this.error_uri = e.get("error_uri"), this.code = e.get("code");
   }
@@ -1139,9 +1141,9 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   }
   get isOpenId() {
     var e;
-    return ((e = this.scope) == null ? void 0 : e.split(" ").includes(Le)) || !!this.id_token;
+    return ((e = this.scope) == null ? void 0 : e.split(" ").includes(Je)) || !!this.id_token;
   }
-}, ze = class {
+}, Ke = class {
   constructor({
     url: e,
     state_data: t,
@@ -1158,13 +1160,13 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       l != null && o.searchParams.append(c, l.toString());
     this.url = o.href;
   }
-}, Je = class {
+}, Ve = class {
   constructor(e) {
     this.state = e.get("state"), this.error = e.get("error"), this.error_description = e.get("error_description"), this.error_uri = e.get("error_uri");
   }
-}, Ke = class {
+}, Ge = class {
   constructor(e) {
-    this._logger = new f("OidcClient"), this.settings = new le(e), this.metadataService = new Ae(this.settings), this._validator = new Fe(this.settings, this.metadataService), this._tokenClient = new de(this.settings, this.metadataService);
+    this._logger = new f("OidcClient"), this.settings = new he(e), this.metadataService = new qe(this.settings), this._validator = new Le(this.settings, this.metadataService), this._tokenClient = new ge(this.settings, this.metadataService);
   }
   async createSigninRequest({
     state: e,
@@ -1193,7 +1195,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       throw new Error("Only the Authorization Code flow (with PKCE) is supported");
     const m = await this.metadataService.getAuthorizationEndpoint();
     _.debug("Received authorization endpoint", m);
-    const y = new De({
+    const y = new ze({
       url: m,
       authority: this.settings.authority,
       client_id: this.settings.client_id,
@@ -1224,13 +1226,13 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     return await this.settings.stateStore.set(k.id, k.toStorageString()), y;
   }
   async readSigninResponseState(e, t = !1) {
-    const r = this._logger.create("readSigninResponseState"), s = new ee(z.readParams(e, this.settings.response_mode));
+    const r = this._logger.create("readSigninResponseState"), s = new re(J.readParams(e, this.settings.response_mode));
     if (!s.state)
       throw r.throw(new Error("No state in response")), null;
     const i = await this.settings.stateStore[t ? "remove" : "get"](s.state);
     if (!i)
       throw r.throw(new Error("No matching state found in storage")), null;
-    return { state: G.fromStorageString(i), response: s };
+    return { state: Q.fromStorageString(i), response: s };
   }
   async processSigninResponse(e) {
     const t = this._logger.create("processSigninResponse"), { state: r, response: s } = await this.readSigninResponseState(e, !0);
@@ -1245,7 +1247,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       scope: e.scope,
       timeoutInSeconds: t,
       refreshTokenCredentials: this.settings.refreshTokenCredentials
-    }), i = new ee(new URLSearchParams());
+    }), i = new re(new URLSearchParams());
     return Object.assign(i, s), r.debug("validating response", i), await this._validator.validateRefreshResponse(i, e), i;
   }
   async createSignoutRequest({
@@ -1259,7 +1261,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     if (!o)
       throw n.throw(new Error("No end session endpoint")), null;
     n.debug("Received end session endpoint", o);
-    const c = new ze({
+    const c = new Ke({
       url: o,
       id_token_hint: t,
       post_logout_redirect_uri: s,
@@ -1272,7 +1274,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     return l && (n.debug("Signout request has state to persist"), await this.settings.stateStore.set(l.id, l.toStorageString())), c;
   }
   async readSignoutResponseState(e, t = !1) {
-    const r = this._logger.create("readSignoutResponseState"), s = new Je(z.readParams(e, this.settings.response_mode));
+    const r = this._logger.create("readSignoutResponseState"), s = new Ve(J.readParams(e, this.settings.response_mode));
     if (!s.state) {
       if (r.debug("No state in response"), s.error)
         throw r.warn("Response was error:", s.error), new M(s);
@@ -1296,7 +1298,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       token_type_hint: t
     });
   }
-}, Ve = class {
+}, Qe = class {
   constructor(e) {
     this._userManager = e, this._logger = new f("SessionMonitor"), this._start = async (t) => {
       const r = t.session_state;
@@ -1311,7 +1313,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
         const i = await this._userManager.metadataService.getCheckSessionIframe();
         if (i) {
           s.debug("initializing check session iframe");
-          const n = this._userManager.settings.client_id, o = this._userManager.settings.checkSessionIntervalInSeconds, c = this._userManager.settings.stopCheckSessionOnError, l = new Oe(this._callback, n, i, o, c);
+          const n = this._userManager.settings.client_id, o = this._userManager.settings.checkSessionIntervalInSeconds, c = this._userManager.settings.stopCheckSessionOnError, l = new Ne(this._callback, n, i, o, c);
           await l.load(), this._checkSessionIFrame = l, l.start(r);
         } else
           s.warn("no check session iframe found in the metadata");
@@ -1408,7 +1410,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   static fromStorageString(e) {
     return f.createStatic("User", "fromStorageString"), new j(JSON.parse(e));
   }
-}, te = "oidc-client", he = class {
+}, se = "oidc-client", ue = class {
   constructor() {
     this._abort = new A("Window navigation aborted"), this._disposeHandlers = /* @__PURE__ */ new Set(), this._window = null;
   }
@@ -1421,9 +1423,9 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       const o = (c) => {
         var l;
         const u = c.data, p = (l = e.scriptOrigin) != null ? l : window.location.origin;
-        if (!(c.origin !== p || (u == null ? void 0 : u.source) !== te)) {
+        if (!(c.origin !== p || (u == null ? void 0 : u.source) !== se)) {
           try {
-            const g = z.readParams(u.url, e.response_mode).get("state");
+            const g = J.readParams(u.url, e.response_mode).get("state");
             if (g || t.warn("no state found in response url"), c.source !== this._window && g !== e.state)
               return;
           } catch {
@@ -1446,53 +1448,53 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   }
   static _notifyParent(e, t, r = !1, s = window.location.origin) {
     e.postMessage({
-      source: te,
+      source: se,
       url: t,
       keepOpen: r
     }, s);
   }
-}, ge = {
+}, _e = {
   location: !1,
   toolbar: !1,
   height: 640
-}, ue = "_blank", Ge = 60, Qe = 2, _e = 10, Xe = class extends le {
+}, pe = "_blank", Xe = 60, Ye = 2, fe = 10, Ze = class extends he {
   constructor(e) {
     const {
       popup_redirect_uri: t = e.redirect_uri,
       popup_post_logout_redirect_uri: r = e.post_logout_redirect_uri,
-      popupWindowFeatures: s = ge,
-      popupWindowTarget: i = ue,
+      popupWindowFeatures: s = _e,
+      popupWindowTarget: i = pe,
       redirectMethod: n = "assign",
       redirectTarget: o = "self",
       iframeNotifyParentOrigin: c = e.iframeNotifyParentOrigin,
       iframeScriptOrigin: l = e.iframeScriptOrigin,
       silent_redirect_uri: u = e.redirect_uri,
-      silentRequestTimeoutInSeconds: p = _e,
+      silentRequestTimeoutInSeconds: p = fe,
       automaticSilentRenew: g = !0,
       validateSubOnSilentRenew: S = !0,
       includeIdTokenInSilentRenew: w = !1,
       monitorSession: b = !1,
       monitorAnonymousSession: h = !1,
-      checkSessionIntervalInSeconds: v = Qe,
+      checkSessionIntervalInSeconds: v = Ye,
       query_status_response_type: E = "code",
       stopCheckSessionOnError: a = !0,
       revokeTokenTypes: d = ["access_token", "refresh_token"],
       revokeTokensOnSignout: _ = !1,
-      accessTokenExpiringNotificationTimeInSeconds: m = Ge,
+      accessTokenExpiringNotificationTimeInSeconds: m = Xe,
       userStore: y
     } = e;
     if (super(e), this.popup_redirect_uri = t, this.popup_post_logout_redirect_uri = r, this.popupWindowFeatures = s, this.popupWindowTarget = i, this.redirectMethod = n, this.redirectTarget = o, this.iframeNotifyParentOrigin = c, this.iframeScriptOrigin = l, this.silent_redirect_uri = u, this.silentRequestTimeoutInSeconds = p, this.automaticSilentRenew = g, this.validateSubOnSilentRenew = S, this.includeIdTokenInSilentRenew = w, this.monitorSession = b, this.monitorAnonymousSession = h, this.checkSessionIntervalInSeconds = v, this.stopCheckSessionOnError = a, this.query_status_response_type = E, this.revokeTokenTypes = d, this.revokeTokensOnSignout = _, this.accessTokenExpiringNotificationTimeInSeconds = m, y)
       this.userStore = y;
     else {
-      const k = typeof window < "u" ? window.sessionStorage : new ae();
-      this.userStore = new ce({ store: k });
+      const k = typeof window < "u" ? window.sessionStorage : new le();
+      this.userStore = new de({ store: k });
     }
   }
-}, J = class extends he {
+}, K = class extends ue {
   constructor({
-    silentRequestTimeoutInSeconds: e = _e
+    silentRequestTimeoutInSeconds: e = fe
   }) {
-    super(), this._logger = new f("IFrameWindow"), this._timeoutInSeconds = e, this._frame = J.createHiddenIframe(), this._window = this._frame.contentWindow;
+    super(), this._logger = new f("IFrameWindow"), this._timeoutInSeconds = e, this._frame = K.createHiddenIframe(), this._window = this._frame.contentWindow;
   }
   static createHiddenIframe() {
     const e = window.document.createElement("iframe");
@@ -1500,7 +1502,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   }
   async navigate(e) {
     this._logger.debug("navigate: Using timeout of:", this._timeoutInSeconds);
-    const t = setTimeout(() => this._abort.raise(new K("IFrame timed out without a response")), this._timeoutInSeconds * 1e3);
+    const t = setTimeout(() => this._abort.raise(new V("IFrame timed out without a response")), this._timeoutInSeconds * 1e3);
     return this._disposeHandlers.add(() => clearTimeout(t)), await super.navigate(e);
   }
   close() {
@@ -1514,33 +1516,33 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   static notifyParent(e, t) {
     return super._notifyParent(window.parent, e, !1, t);
   }
-}, Ye = class {
+}, et = class {
   constructor(e) {
     this._settings = e, this._logger = new f("IFrameNavigator");
   }
   async prepare({
     silentRequestTimeoutInSeconds: e = this._settings.silentRequestTimeoutInSeconds
   }) {
-    return new J({ silentRequestTimeoutInSeconds: e });
+    return new K({ silentRequestTimeoutInSeconds: e });
   }
   async callback(e) {
-    this._logger.create("callback"), J.notifyParent(e, this._settings.iframeNotifyParentOrigin);
+    this._logger.create("callback"), K.notifyParent(e, this._settings.iframeNotifyParentOrigin);
   }
-}, Ze = 500, re = class extends he {
+}, tt = 500, ie = class extends ue {
   constructor({
-    popupWindowTarget: e = ue,
+    popupWindowTarget: e = pe,
     popupWindowFeatures: t = {}
   }) {
     super(), this._logger = new f("PopupWindow");
-    const r = Z.center({ ...ge, ...t });
-    this._window = window.open(void 0, e, Z.serialize(r));
+    const r = te.center({ ..._e, ...t });
+    this._window = window.open(void 0, e, te.serialize(r));
   }
   async navigate(e) {
     var t;
     (t = this._window) == null || t.focus();
     const r = setInterval(() => {
       (!this._window || this._window.closed) && this._abort.raise(new Error("Popup closed by user"));
-    }, Ze);
+    }, tt);
     return this._disposeHandlers.add(() => clearInterval(r)), await super.navigate(e);
   }
   close() {
@@ -1551,7 +1553,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       throw new Error("No window.opener. Can't complete notification.");
     return super._notifyParent(window.opener, e, t);
   }
-}, et = class {
+}, rt = class {
   constructor(e) {
     this._settings = e, this._logger = new f("PopupNavigator");
   }
@@ -1559,12 +1561,12 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     popupWindowFeatures: e = this._settings.popupWindowFeatures,
     popupWindowTarget: t = this._settings.popupWindowTarget
   }) {
-    return new re({ popupWindowFeatures: e, popupWindowTarget: t });
+    return new ie({ popupWindowFeatures: e, popupWindowTarget: t });
   }
   async callback(e, t = !1) {
-    this._logger.create("callback"), re.notifyOpener(e, t);
+    this._logger.create("callback"), ie.notifyOpener(e, t);
   }
-}, tt = class {
+}, st = class {
   constructor(e) {
     this._settings = e, this._logger = new f("RedirectNavigator");
   }
@@ -1591,7 +1593,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
       }
     };
   }
-}, rt = class extends Pe {
+}, it = class extends Ae {
   constructor(e) {
     super({ expiringNotificationTimeInSeconds: e.accessTokenExpiringNotificationTimeInSeconds }), this._logger = new f("UserManagerEvents"), this._userLoaded = new A("User loaded"), this._userUnloaded = new A("User unloaded"), this._silentRenewError = new A("Silent renew error"), this._userSignedIn = new A("User signed in"), this._userSignedOut = new A("User signed out"), this._userSessionChanged = new A("User session changed");
   }
@@ -1649,14 +1651,14 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   _raiseUserSessionChanged() {
     this._userSessionChanged.raise();
   }
-}, st = class {
+}, nt = class {
   constructor(e) {
     this._userManager = e, this._logger = new f("SilentRenewService"), this._isStarted = !1, this._retryTimer = new R("Retry Silent Renew"), this._tokenExpiring = async () => {
       const t = this._logger.create("_tokenExpiring");
       try {
         await this._userManager.signinSilent(), t.debug("silent token renewal successful");
       } catch (r) {
-        if (r instanceof K) {
+        if (r instanceof V) {
           t.warn("ErrorTimeout from signinSilent:", r, "retry in 5s"), this._retryTimer.init(5);
           return;
         }
@@ -1678,13 +1680,13 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   stop() {
     this._isStarted && (this._retryTimer.cancel(), this._retryTimer.removeHandler(this._tokenExpiring), this._userManager.events.removeAccessTokenExpiring(this._tokenExpiring), this._isStarted = !1);
   }
-}, it = class {
+}, ot = class {
   constructor(e) {
     this.refresh_token = e.refresh_token, this.id_token = e.id_token, this.session_state = e.session_state, this.scope = e.scope, this.data = e.state;
   }
-}, nt = class {
+}, at = class {
   constructor(e) {
-    this._logger = new f("UserManager"), this.settings = new Xe(e), this._client = new Ke(e), this._redirectNavigator = new tt(this.settings), this._popupNavigator = new et(this.settings), this._iframeNavigator = new Ye(this.settings), this._events = new rt(this.settings), this._silentRenewService = new st(this), this.settings.automaticSilentRenew && this.startSilentRenew(), this._sessionMonitor = null, this.settings.monitorSession && (this._sessionMonitor = new Ve(this));
+    this._logger = new f("UserManager"), this.settings = new Ze(e), this._client = new Ge(e), this._redirectNavigator = new st(this.settings), this._popupNavigator = new rt(this.settings), this._iframeNavigator = new et(this.settings), this._events = new it(this.settings), this._silentRenewService = new nt(this), this.settings.automaticSilentRenew && this.startSilentRenew(), this._sessionMonitor = null, this.settings.monitorSession && (this._sessionMonitor = new Qe(this));
   }
   get events() {
     return this._events;
@@ -1743,7 +1745,7 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
     let n = await this._loadUser();
     if (n != null && n.refresh_token) {
       r.debug("using refresh token");
-      const u = new it(n);
+      const u = new ot(n);
       return await this._useRefreshToken(u);
     }
     const o = this.settings.silent_redirect_uri;
@@ -1965,9 +1967,9 @@ var Ue = "10000000-1000-4000-8000-100000000000", P = class {
   async clearStaleState() {
     await this._client.clearStaleState();
   }
-};
-const se = (e, t) => (e || (e = []), t || (t = []), Array.isArray(e) || (e = e.split(" ")), Array.isArray(t) || (t = t.split(" ")), e.concat(t).filter((r, s, i) => i.indexOf(r) === s).join(" ").trim()), ot = "https://stage.identity.multicartshop.com", at = "https://identity.multicartshop.com", ct = "Multicart.TypeScript.Client";
-class lt {
+}, ct = "2.0.6", _t = ct;
+const ne = (e, t) => (e || (e = []), t || (t = []), Array.isArray(e) || (e = e.split(" ")), Array.isArray(t) || (t = t.split(" ")), e.concat(t).filter((r, s, i) => i.indexOf(r) === s).join(" ").trim()), lt = "https://stage.identity.multicartshop.com", dt = "https://identity.multicartshop.com", ht = "Multicart.TypeScript.Client";
+class gt {
   constructor(t = {}) {
     this.configuration = t;
   }
@@ -1978,10 +1980,10 @@ class lt {
     return !!this.configuration.sandbox;
   }
   get basePath() {
-    return this.configuration.basePath || this.sandbox ? ot : at;
+    return this.configuration.basePath || this.sandbox ? lt : dt;
   }
   get client_id() {
-    return this.configuration.client_id || ct;
+    return this.configuration.client_id || ht;
   }
   get redirect_uri() {
     return this.configuration.redirect_uri || this.basePath + "/login";
@@ -1993,16 +1995,16 @@ class lt {
     return this.configuration.scopes;
   }
 }
-const dt = new lt();
-class ht extends nt {
-  constructor(t = dt) {
+const ut = new gt();
+class pt extends at {
+  constructor(t = ut) {
     const r = {
       authority: t.basePath,
       loadUserInfo: !0,
       client_id: t.client_id,
       redirect_uri: t.redirect_uri,
       client_secret: t.client_secret,
-      scope: se(t.scopes)
+      scope: ne(t.scopes)
     };
     super(r), this.configuration = t;
   }
@@ -2026,7 +2028,7 @@ class ht extends nt {
       client_id: i,
       client_secret: n,
       scope: o
-    } = this.settings, c = se(o, t);
+    } = this.settings, c = ne(o, t);
     if (!n)
       throw new Error("No client_secret configured");
     try {
@@ -2050,12 +2052,32 @@ class ht extends nt {
   }
 }
 export {
-  at as AUTH_PROD_PATH,
-  ot as AUTH_SANDBOX_PATH,
-  dt as DefaultMulticartOAuthConfig,
-  ct as MULTICART_CLIENT_ID,
-  ht as MulticartOAuthClient,
-  lt as MulticartOAuthConfiguration,
-  se as mergeScopes
+  dt as AUTH_PROD_PATH,
+  lt as AUTH_SANDBOX_PATH,
+  Ae as AccessTokenEvents,
+  Ne as CheckSessionIFrame,
+  ut as DefaultMulticartOAuthConfig,
+  M as ErrorResponse,
+  V as ErrorTimeout,
+  le as InMemoryWebStorage,
+  B as Log,
+  f as Logger,
+  ht as MULTICART_CLIENT_ID,
+  qe as MetadataService,
+  pt as MulticartOAuthClient,
+  gt as MulticartOAuthConfiguration,
+  Ge as OidcClient,
+  he as OidcClientSettingsStore,
+  Qe as SessionMonitor,
+  re as SigninResponse,
+  Q as SigninState,
+  Ve as SignoutResponse,
+  H as State,
+  j as User,
+  at as UserManager,
+  Ze as UserManagerSettingsStore,
+  _t as Version,
+  de as WebStorageStateStore,
+  ne as mergeScopes
 };
 //# sourceMappingURL=cle-oidc-client.mjs.map
