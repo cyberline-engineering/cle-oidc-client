@@ -37,6 +37,7 @@ export declare class MulticartOAuthConfiguration {
     get basePath(): string;
     get client_id(): string;
     get redirect_uri(): string;
+    get logout_redirect_uri(): string;
     get client_secret(): string | undefined;
     get scopes(): string[] | undefined;
 }
@@ -44,6 +45,7 @@ export declare class MulticartOAuthConfiguration {
 export declare interface MulticartOAuthConfigurationParameters {
     client_id?: string;
     redirect_uri?: string;
+    logout_redirect_uri?: string;
     sandbox?: boolean;
     basePath?: string;
     client_secret?: string;

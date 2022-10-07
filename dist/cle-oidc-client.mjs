@@ -1988,6 +1988,9 @@ class gt {
   get redirect_uri() {
     return this.configuration.redirect_uri || this.basePath + "/login";
   }
+  get logout_redirect_uri() {
+    return this.configuration.logout_redirect_uri || this.basePath + "/logout";
+  }
   get client_secret() {
     return this.configuration.client_secret;
   }
@@ -2003,6 +2006,7 @@ class pt extends at {
       loadUserInfo: !0,
       client_id: t.client_id,
       redirect_uri: t.redirect_uri,
+      post_logout_redirect_uri: t.logout_redirect_uri,
       client_secret: t.client_secret,
       scope: ne(t.scopes)
     };

@@ -8,6 +8,7 @@ export const MULTICART_CLIENT_ID = 'Multicart.TypeScript.Client';
 export interface MulticartOAuthConfigurationParameters {
     client_id?: string;
     redirect_uri?: string;
+    logout_redirect_uri?: string;
 
     sandbox?: boolean;
     basePath?: string;
@@ -42,6 +43,12 @@ export class MulticartOAuthConfiguration {
         return this.configuration.redirect_uri || this.basePath + '/login';
     }
 
+    get logout_redirect_uri(): string {
+        return (
+            this.configuration.logout_redirect_uri || this.basePath + '/logout'
+        );
+    }
+
     get client_secret(): string | undefined {
         return this.configuration.client_secret;
     }
@@ -66,6 +73,7 @@ export class MulticartOAuthClient extends UserManager {
             loadUserInfo: true,
             client_id: configuration.client_id,
             redirect_uri: configuration.redirect_uri,
+            post_logout_redirect_uri: configuration.logout_redirect_uri,
             client_secret: configuration.client_secret,
             scope: mergeScopes(configuration.scopes),
         };
