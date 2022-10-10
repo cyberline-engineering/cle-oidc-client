@@ -1,8 +1,9 @@
 import { User, UserManager, UserManagerSettings } from 'oidc-client-ts';
 import { mergeScopes } from './utils';
 
-export const AUTH_SANDBOX_PATH = 'https://stage.identity.multicartshop.com';
-export const AUTH_PROD_PATH = 'https://identity.multicartshop.com';
+export const MULTICART_AUTH_SANDBOX_PATH =
+    'https://stage.identity.multicartshop.com';
+export const MULTICART_AUTH_PROD_PATH = 'https://identity.multicartshop.com';
 export const MULTICART_CLIENT_ID = 'Multicart.TypeScript.Client';
 
 export interface MulticartOAuthConfigurationParameters {
@@ -31,8 +32,8 @@ export class MulticartOAuthConfiguration {
 
     get basePath(): string {
         return this.configuration.basePath || this.sandbox
-            ? AUTH_SANDBOX_PATH
-            : AUTH_PROD_PATH;
+            ? MULTICART_AUTH_SANDBOX_PATH
+            : MULTICART_AUTH_PROD_PATH;
     }
 
     get client_id(): string {
@@ -40,12 +41,16 @@ export class MulticartOAuthConfiguration {
     }
 
     get redirect_uri(): string {
-        return this.configuration.redirect_uri || this.basePath + '/login';
+        return (
+            this.configuration.redirect_uri ||
+            window?.location.origin + '/login'
+        );
     }
 
     get logout_redirect_uri(): string {
         return (
-            this.configuration.logout_redirect_uri || this.basePath + '/logout'
+            this.configuration.logout_redirect_uri ||
+            window?.location.origin + '/logout'
         );
     }
 

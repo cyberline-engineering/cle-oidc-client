@@ -25,7 +25,7 @@ var D = { exports: {} };
 const ke = {}, Ee = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ke
-}, Symbol.toStringTag, { value: "Module" })), xe = /* @__PURE__ */ ye(Ee);
+}, Symbol.toStringTag, { value: "Module" })), Te = /* @__PURE__ */ ye(Ee);
 var Y;
 function $() {
   return Y || (Y = 1, function(e, t) {
@@ -36,7 +36,7 @@ function $() {
         var n;
         if (typeof window < "u" && window.crypto && (n = window.crypto), typeof self < "u" && self.crypto && (n = self.crypto), typeof globalThis < "u" && globalThis.crypto && (n = globalThis.crypto), !n && typeof window < "u" && window.msCrypto && (n = window.msCrypto), !n && typeof q < "u" && q.crypto && (n = q.crypto), !n && typeof be == "function")
           try {
-            n = xe;
+            n = Te;
           } catch {
           }
         var o = function() {
@@ -94,12 +94,12 @@ function $() {
             var d = this.words, _ = a.words, m = this.sigBytes, y = a.sigBytes;
             if (this.clamp(), m % 4)
               for (var k = 0; k < y; k++) {
-                var T = _[k >>> 2] >>> 24 - k % 4 * 8 & 255;
-                d[m + k >>> 2] |= T << 24 - (m + k) % 4 * 8;
+                var x = _[k >>> 2] >>> 24 - k % 4 * 8 & 255;
+                d[m + k >>> 2] |= x << 24 - (m + k) % 4 * 8;
               }
             else
-              for (var x = 0; x < y; x += 4)
-                d[m + x >>> 2] = _[x >>> 2];
+              for (var T = 0; T < y; T += 4)
+                d[m + T >>> 2] = _[T >>> 2];
             return this.sigBytes += y, this;
           },
           clamp: function() {
@@ -160,9 +160,9 @@ function $() {
             typeof a == "string" && (a = h.parse(a)), this._data.concat(a), this._nDataBytes += a.sigBytes;
           },
           _process: function(a) {
-            var d, _ = this._data, m = _.words, y = _.sigBytes, k = this.blockSize, T = k * 4, x = y / T;
-            a ? x = s.ceil(x) : x = s.max((x | 0) - this._minBufferSize, 0);
-            var O = x * k, I = s.min(O * 4, y);
+            var d, _ = this._data, m = _.words, y = _.sigBytes, k = this.blockSize, x = k * 4, T = y / x;
+            a ? T = s.ceil(T) : T = s.max((T | 0) - this._minBufferSize, 0);
+            var O = T * k, I = s.min(O * 4, y);
             if (O) {
               for (var N = 0; N < O; N += k)
                 this._doProcessBlock(m, N);
@@ -211,7 +211,7 @@ function $() {
     });
   }(D)), D.exports;
 }
-var Te = $(), oe = { exports: {} };
+var xe = $(), oe = { exports: {} };
 (function(e, t) {
   (function(r, s) {
     e.exports = s($());
@@ -236,14 +236,14 @@ var Te = $(), oe = { exports: {} };
           this._hash = new o.init(u.slice(0));
         },
         _doProcessBlock: function(w, b) {
-          for (var h = this._hash.words, v = h[0], E = h[1], a = h[2], d = h[3], _ = h[4], m = h[5], y = h[6], k = h[7], T = 0; T < 64; T++) {
-            if (T < 16)
-              g[T] = w[b + T] | 0;
+          for (var h = this._hash.words, v = h[0], E = h[1], a = h[2], d = h[3], _ = h[4], m = h[5], y = h[6], k = h[7], x = 0; x < 64; x++) {
+            if (x < 16)
+              g[x] = w[b + x] | 0;
             else {
-              var x = g[T - 15], O = (x << 25 | x >>> 7) ^ (x << 14 | x >>> 18) ^ x >>> 3, I = g[T - 2], N = (I << 15 | I >>> 17) ^ (I << 13 | I >>> 19) ^ I >>> 10;
-              g[T] = O + g[T - 7] + N + g[T - 16];
+              var T = g[x - 15], O = (T << 25 | T >>> 7) ^ (T << 14 | T >>> 18) ^ T >>> 3, I = g[x - 2], N = (I << 15 | I >>> 17) ^ (I << 13 | I >>> 19) ^ I >>> 10;
+              g[x] = O + g[x - 7] + N + g[x - 16];
             }
-            var F = _ & m ^ ~_ & y, we = v & E ^ v & a ^ E & a, me = (v << 30 | v >>> 2) ^ (v << 19 | v >>> 13) ^ (v << 10 | v >>> 22), ve = (_ << 26 | _ >>> 6) ^ (_ << 21 | _ >>> 11) ^ (_ << 7 | _ >>> 25), X = k + ve + F + p[T] + g[T], Se = me + we;
+            var F = _ & m ^ ~_ & y, we = v & E ^ v & a ^ E & a, me = (v << 30 | v >>> 2) ^ (v << 19 | v >>> 13) ^ (v << 10 | v >>> 22), ve = (_ << 26 | _ >>> 6) ^ (_ << 21 | _ >>> 11) ^ (_ << 7 | _ >>> 25), X = k + ve + F + p[x] + g[x], Se = me + we;
             k = y, y = m, m = _, _ = d + X | 0, d = a, a = E, E = v, v = X + Se | 0;
           }
           h[0] = h[0] + v | 0, h[1] = h[1] + E | 0, h[2] = h[2] + a | 0, h[3] = h[3] + d | 0, h[4] = h[4] + _ | 0, h[5] = h[5] + m | 0, h[6] = h[6] + y | 0, h[7] = h[7] + k | 0;
@@ -443,7 +443,7 @@ var f = class {
 B.reset();
 var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   static _randomWord() {
-    return Te.lib.WordArray.random(1).words[0];
+    return xe.lib.WordArray.random(1).words[0];
   }
   static generateUUIDv4() {
     return Oe.replace(
@@ -821,14 +821,14 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     staleStateAgeInSeconds: m = Be,
     clockSkewInSeconds: y = $e,
     userInfoJwtIssuer: k = "OP",
-    mergeClaims: T = !1,
-    stateStore: x,
+    mergeClaims: x = !1,
+    stateStore: T,
     refreshTokenCredentials: O = "same-origin",
     extraQueryParams: I = {},
     extraTokenParams: N = {}
   }) {
-    if (this.authority = e, t ? this.metadataUrl = t : (this.metadataUrl = e, e && (this.metadataUrl.endsWith("/") || (this.metadataUrl += "/"), this.metadataUrl += ".well-known/openid-configuration")), this.metadata = r, this.metadataSeed = i, this.signingKeys = s, this.client_id = n, this.client_secret = o, this.response_type = c, this.scope = l, this.redirect_uri = u, this.post_logout_redirect_uri = p, this.client_authentication = g, this.prompt = S, this.display = w, this.max_age = b, this.ui_locales = h, this.acr_values = v, this.resource = E, this.response_mode = a, this.filterProtocolClaims = !!d, this.loadUserInfo = !!_, this.staleStateAgeInSeconds = m, this.clockSkewInSeconds = y, this.userInfoJwtIssuer = k, this.mergeClaims = !!T, this.refreshTokenCredentials = O, x)
-      this.stateStore = x;
+    if (this.authority = e, t ? this.metadataUrl = t : (this.metadataUrl = e, e && (this.metadataUrl.endsWith("/") || (this.metadataUrl += "/"), this.metadataUrl += ".well-known/openid-configuration")), this.metadata = r, this.metadataSeed = i, this.signingKeys = s, this.client_id = n, this.client_secret = o, this.response_type = c, this.scope = l, this.redirect_uri = u, this.post_logout_redirect_uri = p, this.client_authentication = g, this.prompt = S, this.display = w, this.max_age = b, this.ui_locales = h, this.acr_values = v, this.resource = E, this.response_mode = a, this.filterProtocolClaims = !!d, this.loadUserInfo = !!_, this.staleStateAgeInSeconds = m, this.clockSkewInSeconds = y, this.userInfoJwtIssuer = k, this.mergeClaims = !!x, this.refreshTokenCredentials = O, T)
+      this.stateStore = T;
     else {
       const F = typeof window < "u" ? window.localStorage : new le();
       this.stateStore = new de({ store: F });
@@ -1986,10 +1986,10 @@ class gt {
     return this.configuration.client_id || ht;
   }
   get redirect_uri() {
-    return this.configuration.redirect_uri || this.basePath + "/login";
+    return this.configuration.redirect_uri || (window == null ? void 0 : window.location.origin) + "/login";
   }
   get logout_redirect_uri() {
-    return this.configuration.logout_redirect_uri || this.basePath + "/logout";
+    return this.configuration.logout_redirect_uri || (window == null ? void 0 : window.location.origin) + "/logout";
   }
   get client_secret() {
     return this.configuration.client_secret;
@@ -2056,8 +2056,6 @@ class pt extends at {
   }
 }
 export {
-  dt as AUTH_PROD_PATH,
-  lt as AUTH_SANDBOX_PATH,
   Ae as AccessTokenEvents,
   Ne as CheckSessionIFrame,
   ut as DefaultMulticartOAuthConfig,
@@ -2066,6 +2064,8 @@ export {
   le as InMemoryWebStorage,
   B as Log,
   f as Logger,
+  dt as MULTICART_AUTH_PROD_PATH,
+  lt as MULTICART_AUTH_SANDBOX_PATH,
   ht as MULTICART_CLIENT_ID,
   qe as MetadataService,
   pt as MulticartOAuthClient,
