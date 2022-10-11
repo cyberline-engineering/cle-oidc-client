@@ -1,7 +1,7 @@
 {
     "name": "@cyberline-engineering/cle-oidc-client",
     "description": "TypeScript client for cyberline identity service",
-    "homepage": "https://identity.multicartshop.com/",
+    "homepage": "https://github.com/cyberline-engineering/cle-oidc-client#readme",
     "private": false,
     "version": "0.2.8",
     "repository": "github:cyberline-engineering/cle-oidc-client",

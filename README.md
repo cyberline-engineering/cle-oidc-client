@@ -1,5 +1,7 @@
 # cle-oidc-client
-### Multicartshop Identity Service client typescript SDK
+
+### Multicartshop Identity Service client TypeScript SDK
+
 [![Stable Release](https://img.shields.io/npm/v/@cyberline-engineering/cle-oidc-client.svg)](https://npm.im/@cyberline-engineering/cle-oidc-client)
 
 Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for
@@ -12,18 +14,19 @@ This project based on
 Implements the following OAuth 2.0 protocols and supports
 [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html):
 
-- [Authorization Code Grant](https://oauth.net/2/grant-types/authorization-code/)
-  with [PKCE](https://oauth.net/2/pkce/)
-- [Refresh Token Grant](https://oauth.net/2/grant-types/refresh-token/)
+-   [Authorization Code Grant](https://oauth.net/2/grant-types/authorization-code/)
+    with [PKCE](https://oauth.net/2/pkce/)
+-   [Refresh Token Grant](https://oauth.net/2/grant-types/refresh-token/)
 
 **Additinal**
-- [Password Grant](https://oauth.net/2/grant-types/password/)
-- [Client Credentials Grant](https://oauth.net/2/grant-types/client-credentials/) for nodejs environment (not browser)
+
+-   [Password Grant](https://oauth.net/2/grant-types/password/)
+-   [Client Credentials Grant](https://oauth.net/2/grant-types/client-credentials/) for nodejs environment (not browser)
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Building the Source](#building-the-source)
+-   [Installation](#installation)
+-   [Building the Source](#building-the-source)
 
 ## Installation
 
