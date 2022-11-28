@@ -86,20 +86,6 @@ export class MulticartOAuthClient extends UserManager {
         super(umSettings);
     }
 
-    public async signinPasswordGrant({
-        username,
-        password,
-    }: {
-        username: string;
-        password: string;
-    }) {
-        const args = {
-            extraQueryParams: { username, password, grant_type: 'password' },
-        };
-
-        return this.signinSilent(args);
-    }
-
     public async signinClientCredentials({
         scopes,
     }: { scopes?: string[] } = {}) {

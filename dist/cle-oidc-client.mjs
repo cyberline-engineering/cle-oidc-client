@@ -1,40 +1,40 @@
-var q = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
+var N = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function ye(e) {
   var t = e.default;
   if (typeof t == "function") {
-    var r = function() {
+    var s = function() {
       return t.apply(this, arguments);
     };
-    r.prototype = t.prototype;
+    s.prototype = t.prototype;
   } else
-    r = {};
-  return Object.defineProperty(r, "__esModule", { value: !0 }), Object.keys(e).forEach(function(s) {
-    var i = Object.getOwnPropertyDescriptor(e, s);
-    Object.defineProperty(r, s, i.get ? i : {
+    s = {};
+  return Object.defineProperty(s, "__esModule", { value: !0 }), Object.keys(e).forEach(function(r) {
+    var i = Object.getOwnPropertyDescriptor(e, r);
+    Object.defineProperty(s, r, i.get ? i : {
       enumerable: !0,
       get: function() {
-        return e[s];
+        return e[r];
       }
     });
-  }), r;
+  }), s;
 }
 function be(e) {
   throw new Error('Could not dynamically require "' + e + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
-var D = { exports: {} };
+var z = { exports: {} };
 const ke = {}, Ee = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ke
 }, Symbol.toStringTag, { value: "Module" })), Te = /* @__PURE__ */ ye(Ee);
-var Y;
-function $() {
-  return Y || (Y = 1, function(e, t) {
-    (function(r, s) {
-      e.exports = s();
-    })(q, function() {
-      var r = r || function(s, i) {
+var te;
+function F() {
+  return te || (te = 1, function(e, t) {
+    (function(s, r) {
+      e.exports = r();
+    })(N, function() {
+      var s = s || function(r, i) {
         var n;
-        if (typeof window < "u" && window.crypto && (n = window.crypto), typeof self < "u" && self.crypto && (n = self.crypto), typeof globalThis < "u" && globalThis.crypto && (n = globalThis.crypto), !n && typeof window < "u" && window.msCrypto && (n = window.msCrypto), !n && typeof q < "u" && q.crypto && (n = q.crypto), !n && typeof be == "function")
+        if (typeof window < "u" && window.crypto && (n = window.crypto), typeof self < "u" && self.crypto && (n = self.crypto), typeof globalThis < "u" && globalThis.crypto && (n = globalThis.crypto), !n && typeof window < "u" && window.msCrypto && (n = window.msCrypto), !n && typeof N < "u" && N.crypto && (n = N.crypto), !n && typeof be == "function")
           try {
             n = Te;
           } catch {
@@ -53,17 +53,17 @@ function $() {
               }
           }
           throw new Error("Native crypto module could not be used to get secure random number.");
-        }, c = Object.create || function() {
+        }, l = Object.create || function() {
           function a() {
           }
           return function(d) {
-            var _;
-            return a.prototype = d, _ = new a(), a.prototype = null, _;
+            var p;
+            return a.prototype = d, p = new a(), a.prototype = null, p;
           };
-        }(), l = {}, u = l.lib = {}, p = u.Base = function() {
+        }(), c = {}, u = c.lib = {}, _ = u.Base = function() {
           return {
             extend: function(a) {
-              var d = c(this);
+              var d = l(this);
               return a && d.mixIn(a), (!d.hasOwnProperty("init") || this.init === d.init) && (d.init = function() {
                 d.$super.init.apply(this, arguments);
               }), d.init.prototype = d, d.$super = this, d;
@@ -83,7 +83,7 @@ function $() {
               return this.init.prototype.extend(this);
             }
           };
-        }(), g = u.WordArray = p.extend({
+        }(), g = u.WordArray = _.extend({
           init: function(a, d) {
             a = this.words = a || [], d != i ? this.sigBytes = d : this.sigBytes = a.length * 4;
           },
@@ -91,55 +91,55 @@ function $() {
             return (a || w).stringify(this);
           },
           concat: function(a) {
-            var d = this.words, _ = a.words, m = this.sigBytes, y = a.sigBytes;
+            var d = this.words, p = a.words, m = this.sigBytes, y = a.sigBytes;
             if (this.clamp(), m % 4)
               for (var k = 0; k < y; k++) {
-                var x = _[k >>> 2] >>> 24 - k % 4 * 8 & 255;
-                d[m + k >>> 2] |= x << 24 - (m + k) % 4 * 8;
+                var T = p[k >>> 2] >>> 24 - k % 4 * 8 & 255;
+                d[m + k >>> 2] |= T << 24 - (m + k) % 4 * 8;
               }
             else
-              for (var T = 0; T < y; T += 4)
-                d[m + T >>> 2] = _[T >>> 2];
+              for (var R = 0; R < y; R += 4)
+                d[m + R >>> 2] = p[R >>> 2];
             return this.sigBytes += y, this;
           },
           clamp: function() {
             var a = this.words, d = this.sigBytes;
-            a[d >>> 2] &= 4294967295 << 32 - d % 4 * 8, a.length = s.ceil(d / 4);
+            a[d >>> 2] &= 4294967295 << 32 - d % 4 * 8, a.length = r.ceil(d / 4);
           },
           clone: function() {
-            var a = p.clone.call(this);
+            var a = _.clone.call(this);
             return a.words = this.words.slice(0), a;
           },
           random: function(a) {
-            for (var d = [], _ = 0; _ < a; _ += 4)
+            for (var d = [], p = 0; p < a; p += 4)
               d.push(o());
             return new g.init(d, a);
           }
-        }), S = l.enc = {}, w = S.Hex = {
+        }), S = c.enc = {}, w = S.Hex = {
           stringify: function(a) {
-            for (var d = a.words, _ = a.sigBytes, m = [], y = 0; y < _; y++) {
+            for (var d = a.words, p = a.sigBytes, m = [], y = 0; y < p; y++) {
               var k = d[y >>> 2] >>> 24 - y % 4 * 8 & 255;
               m.push((k >>> 4).toString(16)), m.push((k & 15).toString(16));
             }
             return m.join("");
           },
           parse: function(a) {
-            for (var d = a.length, _ = [], m = 0; m < d; m += 2)
-              _[m >>> 3] |= parseInt(a.substr(m, 2), 16) << 24 - m % 8 * 4;
-            return new g.init(_, d / 2);
+            for (var d = a.length, p = [], m = 0; m < d; m += 2)
+              p[m >>> 3] |= parseInt(a.substr(m, 2), 16) << 24 - m % 8 * 4;
+            return new g.init(p, d / 2);
           }
         }, b = S.Latin1 = {
           stringify: function(a) {
-            for (var d = a.words, _ = a.sigBytes, m = [], y = 0; y < _; y++) {
+            for (var d = a.words, p = a.sigBytes, m = [], y = 0; y < p; y++) {
               var k = d[y >>> 2] >>> 24 - y % 4 * 8 & 255;
               m.push(String.fromCharCode(k));
             }
             return m.join("");
           },
           parse: function(a) {
-            for (var d = a.length, _ = [], m = 0; m < d; m++)
-              _[m >>> 2] |= (a.charCodeAt(m) & 255) << 24 - m % 4 * 8;
-            return new g.init(_, d);
+            for (var d = a.length, p = [], m = 0; m < d; m++)
+              p[m >>> 2] |= (a.charCodeAt(m) & 255) << 24 - m % 4 * 8;
+            return new g.init(p, d);
           }
         }, h = S.Utf8 = {
           stringify: function(a) {
@@ -152,7 +152,7 @@ function $() {
           parse: function(a) {
             return b.parse(unescape(encodeURIComponent(a)));
           }
-        }, v = u.BufferedBlockAlgorithm = p.extend({
+        }, v = u.BufferedBlockAlgorithm = _.extend({
           reset: function() {
             this._data = new g.init(), this._nDataBytes = 0;
           },
@@ -160,24 +160,24 @@ function $() {
             typeof a == "string" && (a = h.parse(a)), this._data.concat(a), this._nDataBytes += a.sigBytes;
           },
           _process: function(a) {
-            var d, _ = this._data, m = _.words, y = _.sigBytes, k = this.blockSize, x = k * 4, T = y / x;
-            a ? T = s.ceil(T) : T = s.max((T | 0) - this._minBufferSize, 0);
-            var O = T * k, I = s.min(O * 4, y);
-            if (O) {
-              for (var N = 0; N < O; N += k)
-                this._doProcessBlock(m, N);
-              d = m.splice(0, O), _.sigBytes -= I;
+            var d, p = this._data, m = p.words, y = p.sigBytes, k = this.blockSize, T = k * 4, R = y / T;
+            a ? R = r.ceil(R) : R = r.max((R | 0) - this._minBufferSize, 0);
+            var C = R * k, I = r.min(C * 4, y);
+            if (C) {
+              for (var A = 0; A < C; A += k)
+                this._doProcessBlock(m, A);
+              d = m.splice(0, C), p.sigBytes -= I;
             }
             return new g.init(d, I);
           },
           clone: function() {
-            var a = p.clone.call(this);
+            var a = _.clone.call(this);
             return a._data = this._data.clone(), a;
           },
           _minBufferSize: 0
         });
         u.Hasher = v.extend({
-          cfg: p.extend(),
+          cfg: _.extend(),
           init: function(a) {
             this.cfg = this.cfg.extend(a), this.reset();
           },
@@ -194,33 +194,33 @@ function $() {
           },
           blockSize: 16,
           _createHelper: function(a) {
-            return function(d, _) {
-              return new a.init(_).finalize(d);
+            return function(d, p) {
+              return new a.init(p).finalize(d);
             };
           },
           _createHmacHelper: function(a) {
-            return function(d, _) {
-              return new E.HMAC.init(a, _).finalize(d);
+            return function(d, p) {
+              return new E.HMAC.init(a, p).finalize(d);
             };
           }
         });
-        var E = l.algo = {};
-        return l;
+        var E = c.algo = {};
+        return c;
       }(Math);
-      return r;
+      return s;
     });
-  }(D)), D.exports;
+  }(z)), z.exports;
 }
-var xe = $(), oe = { exports: {} };
+var Re = F(), ce = { exports: {} };
 (function(e, t) {
-  (function(r, s) {
-    e.exports = s($());
-  })(q, function(r) {
-    return function(s) {
-      var i = r, n = i.lib, o = n.WordArray, c = n.Hasher, l = i.algo, u = [], p = [];
+  (function(s, r) {
+    e.exports = r(F());
+  })(N, function(s) {
+    return function(r) {
+      var i = s, n = i.lib, o = n.WordArray, l = n.Hasher, c = i.algo, u = [], _ = [];
       (function() {
         function w(E) {
-          for (var a = s.sqrt(E), d = 2; d <= a; d++)
+          for (var a = r.sqrt(E), d = 2; d <= a; d++)
             if (!(E % d))
               return !1;
           return !0;
@@ -229,52 +229,52 @@ var xe = $(), oe = { exports: {} };
           return (E - (E | 0)) * 4294967296 | 0;
         }
         for (var h = 2, v = 0; v < 64; )
-          w(h) && (v < 8 && (u[v] = b(s.pow(h, 1 / 2))), p[v] = b(s.pow(h, 1 / 3)), v++), h++;
+          w(h) && (v < 8 && (u[v] = b(r.pow(h, 1 / 2))), _[v] = b(r.pow(h, 1 / 3)), v++), h++;
       })();
-      var g = [], S = l.SHA256 = c.extend({
+      var g = [], S = c.SHA256 = l.extend({
         _doReset: function() {
           this._hash = new o.init(u.slice(0));
         },
         _doProcessBlock: function(w, b) {
-          for (var h = this._hash.words, v = h[0], E = h[1], a = h[2], d = h[3], _ = h[4], m = h[5], y = h[6], k = h[7], x = 0; x < 64; x++) {
-            if (x < 16)
-              g[x] = w[b + x] | 0;
+          for (var h = this._hash.words, v = h[0], E = h[1], a = h[2], d = h[3], p = h[4], m = h[5], y = h[6], k = h[7], T = 0; T < 64; T++) {
+            if (T < 16)
+              g[T] = w[b + T] | 0;
             else {
-              var T = g[x - 15], O = (T << 25 | T >>> 7) ^ (T << 14 | T >>> 18) ^ T >>> 3, I = g[x - 2], N = (I << 15 | I >>> 17) ^ (I << 13 | I >>> 19) ^ I >>> 10;
-              g[x] = O + g[x - 7] + N + g[x - 16];
+              var R = g[T - 15], C = (R << 25 | R >>> 7) ^ (R << 14 | R >>> 18) ^ R >>> 3, I = g[T - 2], A = (I << 15 | I >>> 17) ^ (I << 13 | I >>> 19) ^ I >>> 10;
+              g[T] = C + g[T - 7] + A + g[T - 16];
             }
-            var F = _ & m ^ ~_ & y, we = v & E ^ v & a ^ E & a, me = (v << 30 | v >>> 2) ^ (v << 19 | v >>> 13) ^ (v << 10 | v >>> 22), ve = (_ << 26 | _ >>> 6) ^ (_ << 21 | _ >>> 11) ^ (_ << 7 | _ >>> 25), X = k + ve + F + p[x] + g[x], Se = me + we;
-            k = y, y = m, m = _, _ = d + X | 0, d = a, a = E, E = v, v = X + Se | 0;
+            var $ = p & m ^ ~p & y, L = v & E ^ v & a ^ E & a, D = (v << 30 | v >>> 2) ^ (v << 19 | v >>> 13) ^ (v << 10 | v >>> 22), ve = (p << 26 | p >>> 6) ^ (p << 21 | p >>> 11) ^ (p << 7 | p >>> 25), ee = k + ve + $ + _[T] + g[T], Se = D + L;
+            k = y, y = m, m = p, p = d + ee | 0, d = a, a = E, E = v, v = ee + Se | 0;
           }
-          h[0] = h[0] + v | 0, h[1] = h[1] + E | 0, h[2] = h[2] + a | 0, h[3] = h[3] + d | 0, h[4] = h[4] + _ | 0, h[5] = h[5] + m | 0, h[6] = h[6] + y | 0, h[7] = h[7] + k | 0;
+          h[0] = h[0] + v | 0, h[1] = h[1] + E | 0, h[2] = h[2] + a | 0, h[3] = h[3] + d | 0, h[4] = h[4] + p | 0, h[5] = h[5] + m | 0, h[6] = h[6] + y | 0, h[7] = h[7] + k | 0;
         },
         _doFinalize: function() {
           var w = this._data, b = w.words, h = this._nDataBytes * 8, v = w.sigBytes * 8;
-          return b[v >>> 5] |= 128 << 24 - v % 32, b[(v + 64 >>> 9 << 4) + 14] = s.floor(h / 4294967296), b[(v + 64 >>> 9 << 4) + 15] = h, w.sigBytes = b.length * 4, this._process(), this._hash;
+          return b[v >>> 5] |= 128 << 24 - v % 32, b[(v + 64 >>> 9 << 4) + 14] = r.floor(h / 4294967296), b[(v + 64 >>> 9 << 4) + 15] = h, w.sigBytes = b.length * 4, this._process(), this._hash;
         },
         clone: function() {
-          var w = c.clone.call(this);
+          var w = l.clone.call(this);
           return w._hash = this._hash.clone(), w;
         }
       });
-      i.SHA256 = c._createHelper(S), i.HmacSHA256 = c._createHmacHelper(S);
-    }(Math), r.SHA256;
+      i.SHA256 = l._createHelper(S), i.HmacSHA256 = l._createHmacHelper(S);
+    }(Math), s.SHA256;
   });
-})(oe);
-const Re = oe.exports;
-var ae = { exports: {} };
+})(ce);
+const xe = ce.exports;
+var le = { exports: {} };
 (function(e, t) {
-  (function(r, s) {
-    e.exports = s($());
-  })(q, function(r) {
+  (function(s, r) {
+    e.exports = r(F());
+  })(N, function(s) {
     return function() {
-      var s = r, i = s.lib, n = i.WordArray, o = s.enc;
+      var r = s, i = r.lib, n = i.WordArray, o = r.enc;
       o.Base64 = {
-        stringify: function(l) {
-          var u = l.words, p = l.sigBytes, g = this._map;
-          l.clamp();
-          for (var S = [], w = 0; w < p; w += 3)
-            for (var b = u[w >>> 2] >>> 24 - w % 4 * 8 & 255, h = u[w + 1 >>> 2] >>> 24 - (w + 1) % 4 * 8 & 255, v = u[w + 2 >>> 2] >>> 24 - (w + 2) % 4 * 8 & 255, E = b << 16 | h << 8 | v, a = 0; a < 4 && w + a * 0.75 < p; a++)
+        stringify: function(c) {
+          var u = c.words, _ = c.sigBytes, g = this._map;
+          c.clamp();
+          for (var S = [], w = 0; w < _; w += 3)
+            for (var b = u[w >>> 2] >>> 24 - w % 4 * 8 & 255, h = u[w + 1 >>> 2] >>> 24 - (w + 1) % 4 * 8 & 255, v = u[w + 2 >>> 2] >>> 24 - (w + 2) % 4 * 8 & 255, E = b << 16 | h << 8 | v, a = 0; a < 4 && w + a * 0.75 < _; a++)
               S.push(g.charAt(E >>> 6 * (3 - a) & 63));
           var d = g.charAt(64);
           if (d)
@@ -282,56 +282,56 @@ var ae = { exports: {} };
               S.push(d);
           return S.join("");
         },
-        parse: function(l) {
-          var u = l.length, p = this._map, g = this._reverseMap;
+        parse: function(c) {
+          var u = c.length, _ = this._map, g = this._reverseMap;
           if (!g) {
             g = this._reverseMap = [];
-            for (var S = 0; S < p.length; S++)
-              g[p.charCodeAt(S)] = S;
+            for (var S = 0; S < _.length; S++)
+              g[_.charCodeAt(S)] = S;
           }
-          var w = p.charAt(64);
+          var w = _.charAt(64);
           if (w) {
-            var b = l.indexOf(w);
+            var b = c.indexOf(w);
             b !== -1 && (u = b);
           }
-          return c(l, u, g);
+          return l(c, u, g);
         },
         _map: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
       };
-      function c(l, u, p) {
+      function l(c, u, _) {
         for (var g = [], S = 0, w = 0; w < u; w++)
           if (w % 4) {
-            var b = p[l.charCodeAt(w - 1)] << w % 4 * 2, h = p[l.charCodeAt(w)] >>> 6 - w % 4 * 2, v = b | h;
+            var b = _[c.charCodeAt(w - 1)] << w % 4 * 2, h = _[c.charCodeAt(w)] >>> 6 - w % 4 * 2, v = b | h;
             g[S >>> 2] |= v << 24 - S % 4 * 8, S++;
           }
         return n.create(g, S);
       }
-    }(), r.enc.Base64;
+    }(), s.enc.Base64;
   });
-})(ae);
-const Z = ae.exports;
-var ce = { exports: {} };
+})(le);
+const se = le.exports;
+var de = { exports: {} };
 (function(e, t) {
-  (function(r, s) {
-    e.exports = s($());
-  })(q, function(r) {
-    return r.enc.Utf8;
+  (function(s, r) {
+    e.exports = r(F());
+  })(N, function(s) {
+    return s.enc.Utf8;
   });
-})(ce);
-const Ie = ce.exports;
-function L(e) {
+})(de);
+const Ce = de.exports;
+function K(e) {
   this.message = e;
 }
-L.prototype = new Error(), L.prototype.name = "InvalidCharacterError";
-var ee = typeof window < "u" && window.atob && window.atob.bind(window) || function(e) {
+K.prototype = new Error(), K.prototype.name = "InvalidCharacterError";
+var re = typeof window < "u" && window.atob && window.atob.bind(window) || function(e) {
   var t = String(e).replace(/=+$/, "");
   if (t.length % 4 == 1)
-    throw new L("'atob' failed: The string to be decoded is not correctly encoded.");
-  for (var r, s, i = 0, n = 0, o = ""; s = t.charAt(n++); ~s && (r = i % 4 ? 64 * r + s : s, i++ % 4) ? o += String.fromCharCode(255 & r >> (-2 * i & 6)) : 0)
-    s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(s);
+    throw new K("'atob' failed: The string to be decoded is not correctly encoded.");
+  for (var s, r, i = 0, n = 0, o = ""; r = t.charAt(n++); ~r && (s = i % 4 ? 64 * s + r : r, i++ % 4) ? o += String.fromCharCode(255 & s >> (-2 * i & 6)) : 0)
+    r = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(r);
   return o;
 };
-function Ce(e) {
+function Ie(e) {
   var t = e.replace(/-/g, "+").replace(/_/g, "/");
   switch (t.length % 4) {
     case 0:
@@ -346,30 +346,30 @@ function Ce(e) {
       throw "Illegal base64url string!";
   }
   try {
-    return function(r) {
-      return decodeURIComponent(ee(r).replace(/(.)/g, function(s, i) {
+    return function(s) {
+      return decodeURIComponent(re(s).replace(/(.)/g, function(r, i) {
         var n = i.charCodeAt(0).toString(16).toUpperCase();
         return n.length < 2 && (n = "0" + n), "%" + n;
       }));
     }(t);
   } catch {
-    return ee(t);
+    return re(t);
   }
 }
-function W(e) {
+function B(e) {
   this.message = e;
 }
 function Ue(e, t) {
   if (typeof e != "string")
-    throw new W("Invalid token specified");
-  var r = (t = t || {}).header === !0 ? 0 : 1;
+    throw new B("Invalid token specified");
+  var s = (t = t || {}).header === !0 ? 0 : 1;
   try {
-    return JSON.parse(Ce(e.split(".")[r]));
-  } catch (s) {
-    throw new W("Invalid token specified: " + s.message);
+    return JSON.parse(Ie(e.split(".")[s]));
+  } catch (r) {
+    throw new B("Invalid token specified: " + r.message);
   }
 }
-W.prototype = new Error(), W.prototype.name = "InvalidTokenError";
+B.prototype = new Error(), B.prototype.name = "InvalidTokenError";
 var Pe = {
   debug: () => {
   },
@@ -379,38 +379,38 @@ var Pe = {
   },
   error: () => {
   }
-}, C, U, B = /* @__PURE__ */ ((e) => (e[e.NONE = 0] = "NONE", e[e.ERROR = 1] = "ERROR", e[e.WARN = 2] = "WARN", e[e.INFO = 3] = "INFO", e[e.DEBUG = 4] = "DEBUG", e))(B || {});
+}, U, P, W = /* @__PURE__ */ ((e) => (e[e.NONE = 0] = "NONE", e[e.ERROR = 1] = "ERROR", e[e.WARN = 2] = "WARN", e[e.INFO = 3] = "INFO", e[e.DEBUG = 4] = "DEBUG", e))(W || {});
 ((e) => {
   function t() {
-    C = 3, U = Pe;
+    U = 3, P = Pe;
   }
   e.reset = t;
-  function r(i) {
+  function s(i) {
     if (!(0 <= i && i <= 4))
       throw new Error("Invalid log level");
-    C = i;
-  }
-  e.setLevel = r;
-  function s(i) {
     U = i;
   }
-  e.setLogger = s;
-})(B || (B = {}));
+  e.setLevel = s;
+  function r(i) {
+    P = i;
+  }
+  e.setLogger = r;
+})(W || (W = {}));
 var f = class {
   constructor(e) {
     this._name = e;
   }
   debug(...e) {
-    C >= 4 && U.debug(f._format(this._name, this._method), ...e);
+    U >= 4 && P.debug(f._format(this._name, this._method), ...e);
   }
   info(...e) {
-    C >= 3 && U.info(f._format(this._name, this._method), ...e);
+    U >= 3 && P.info(f._format(this._name, this._method), ...e);
   }
   warn(...e) {
-    C >= 2 && U.warn(f._format(this._name, this._method), ...e);
+    U >= 2 && P.warn(f._format(this._name, this._method), ...e);
   }
   error(...e) {
-    C >= 1 && U.error(f._format(this._name, this._method), ...e);
+    U >= 1 && P.error(f._format(this._name, this._method), ...e);
   }
   throw(e) {
     throw this.error(e), e;
@@ -420,53 +420,53 @@ var f = class {
     return t._method = e, t.debug("begin"), t;
   }
   static createStatic(e, t) {
-    const r = new f(`${e}.${t}`);
-    return r.debug("begin"), r;
+    const s = new f(`${e}.${t}`);
+    return s.debug("begin"), s;
   }
   static _format(e, t) {
-    const r = `[${e}]`;
-    return t ? `${r} ${t}:` : r;
+    const s = `[${e}]`;
+    return t ? `${s} ${t}:` : s;
   }
   static debug(e, ...t) {
-    C >= 4 && U.debug(f._format(e), ...t);
+    U >= 4 && P.debug(f._format(e), ...t);
   }
   static info(e, ...t) {
-    C >= 3 && U.info(f._format(e), ...t);
+    U >= 3 && P.info(f._format(e), ...t);
   }
   static warn(e, ...t) {
-    C >= 2 && U.warn(f._format(e), ...t);
+    U >= 2 && P.warn(f._format(e), ...t);
   }
   static error(e, ...t) {
-    C >= 1 && U.error(f._format(e), ...t);
+    U >= 1 && P.error(f._format(e), ...t);
   }
 };
-B.reset();
-var Oe = "10000000-1000-4000-8000-100000000000", P = class {
+W.reset();
+var Oe = "10000000-1000-4000-8000-100000000000", O = class {
   static _randomWord() {
-    return xe.lib.WordArray.random(1).words[0];
+    return Re.lib.WordArray.random(1).words[0];
   }
   static generateUUIDv4() {
     return Oe.replace(
       /[018]/g,
-      (t) => (+t ^ P._randomWord() & 15 >> +t / 4).toString(16)
+      (t) => (+t ^ O._randomWord() & 15 >> +t / 4).toString(16)
     ).replace(/-/g, "");
   }
   static generateCodeVerifier() {
-    return P.generateUUIDv4() + P.generateUUIDv4() + P.generateUUIDv4();
+    return O.generateUUIDv4() + O.generateUUIDv4() + O.generateUUIDv4();
   }
   static generateCodeChallenge(e) {
     try {
-      const t = Re(e);
-      return Z.stringify(t).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+      const t = xe(e);
+      return se.stringify(t).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
     } catch (t) {
       throw f.error("CryptoUtils.generateCodeChallenge", t), t;
     }
   }
   static generateBasicAuth(e, t) {
-    const r = Ie.parse([e, t].join(":"));
-    return Z.stringify(r);
+    const s = Ce.parse([e, t].join(":"));
+    return se.stringify(s);
   }
-}, A = class {
+}, q = class {
   constructor(e) {
     this._name = e, this._logger = new f(`Event('${this._name}')`), this._callbacks = [];
   }
@@ -482,7 +482,7 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     for (const t of this._callbacks)
       t(...e);
   }
-}, z = class {
+}, V = class {
   static decode(e) {
     try {
       return Ue(e);
@@ -490,19 +490,19 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
       throw f.error("JwtUtils.decode", t), t;
     }
   }
-}, te = class {
+}, ie = class {
   static center({ ...e }) {
-    var t, r, s;
-    return e.width == null && (e.width = (t = [800, 720, 600, 480].find((i) => i <= window.outerWidth / 1.618)) != null ? t : 360), (r = e.left) != null || (e.left = Math.max(0, Math.round(window.screenX + (window.outerWidth - e.width) / 2))), e.height != null && ((s = e.top) != null || (e.top = Math.max(0, Math.round(window.screenY + (window.outerHeight - e.height) / 2)))), e;
+    var t, s, r;
+    return e.width == null && (e.width = (t = [800, 720, 600, 480].find((i) => i <= window.outerWidth / 1.618)) != null ? t : 360), (s = e.left) != null || (e.left = Math.max(0, Math.round(window.screenX + (window.outerWidth - e.width) / 2))), e.height != null && ((r = e.top) != null || (e.top = Math.max(0, Math.round(window.screenY + (window.outerHeight - e.height) / 2)))), e;
   }
   static serialize(e) {
-    return Object.entries(e).filter(([, t]) => t != null).map(([t, r]) => `${t}=${typeof r != "boolean" ? r : r ? "yes" : "no"}`).join(",");
+    return Object.entries(e).filter(([, t]) => t != null).map(([t, s]) => `${t}=${typeof s != "boolean" ? s : s ? "yes" : "no"}`).join(",");
   }
-}, R = class extends A {
+}, x = class extends q {
   constructor() {
     super(...arguments), this._logger = new f(`Timer('${this._name}')`), this._timerHandle = null, this._expiration = 0, this._callback = () => {
-      const e = this._expiration - R.getEpochTime();
-      this._logger.debug("timer completes in", e), this._expiration <= R.getEpochTime() && (this.cancel(), super.raise());
+      const e = this._expiration - x.getEpochTime();
+      this._logger.debug("timer completes in", e), this._expiration <= x.getEpochTime() && (this.cancel(), super.raise());
     };
   }
   static getEpochTime() {
@@ -511,14 +511,14 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   init(e) {
     const t = this._logger.create("init");
     e = Math.max(Math.floor(e), 1);
-    const r = R.getEpochTime() + e;
-    if (this.expiration === r && this._timerHandle) {
+    const s = x.getEpochTime() + e;
+    if (this.expiration === s && this._timerHandle) {
       t.debug("skipping since already initialized for expiration at", this.expiration);
       return;
     }
-    this.cancel(), t.debug("using duration", e), this._expiration = r;
-    const s = Math.min(e, 5);
-    this._timerHandle = setInterval(this._callback, s * 1e3);
+    this.cancel(), t.debug("using duration", e), this._expiration = s;
+    const r = Math.min(e, 5);
+    this._timerHandle = setInterval(this._callback, r * 1e3);
   }
   get expiration() {
     return this._expiration;
@@ -526,39 +526,39 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   cancel() {
     this._logger.create("cancel"), this._timerHandle && (clearInterval(this._timerHandle), this._timerHandle = null);
   }
-}, J = class {
+}, G = class {
   static readParams(e, t = "query") {
     if (!e)
       throw new TypeError("Invalid URL");
-    const s = new URL(e, window.location.origin)[t === "fragment" ? "hash" : "search"];
-    return new URLSearchParams(s.slice(1));
+    const r = new URL(e, window.location.origin)[t === "fragment" ? "hash" : "search"];
+    return new URLSearchParams(r.slice(1));
   }
 }, M = class extends Error {
   constructor(e, t) {
-    var r, s, i;
+    var s, r, i;
     if (super(e.error_description || e.error || ""), this.form = t, this.name = "ErrorResponse", !e.error)
       throw f.error("ErrorResponse", "No error passed"), new Error("No error passed");
-    this.error = e.error, this.error_description = (r = e.error_description) != null ? r : null, this.error_uri = (s = e.error_uri) != null ? s : null, this.state = e.userState, this.session_state = (i = e.session_state) != null ? i : null;
+    this.error = e.error, this.error_description = (s = e.error_description) != null ? s : null, this.error_uri = (r = e.error_uri) != null ? r : null, this.state = e.userState, this.session_state = (i = e.session_state) != null ? i : null;
   }
-}, V = class extends Error {
+}, X = class extends Error {
   constructor(e) {
     super(e), this.name = "ErrorTimeout";
   }
 }, Ae = class {
   constructor(e) {
-    this._logger = new f("AccessTokenEvents"), this._expiringTimer = new R("Access token expiring"), this._expiredTimer = new R("Access token expired"), this._expiringNotificationTimeInSeconds = e.expiringNotificationTimeInSeconds;
+    this._logger = new f("AccessTokenEvents"), this._expiringTimer = new x("Access token expiring"), this._expiredTimer = new x("Access token expired"), this._expiringNotificationTimeInSeconds = e.expiringNotificationTimeInSeconds;
   }
   load(e) {
     const t = this._logger.create("load");
     if (e.access_token && e.expires_in !== void 0) {
-      const r = e.expires_in;
-      if (t.debug("access token present, remaining duration:", r), r > 0) {
-        let i = r - this._expiringNotificationTimeInSeconds;
+      const s = e.expires_in;
+      if (t.debug("access token present, remaining duration:", s), s > 0) {
+        let i = s - this._expiringNotificationTimeInSeconds;
         i <= 0 && (i = 1), t.debug("registering expiring timer, raising in", i, "seconds"), this._expiringTimer.init(i);
       } else
         t.debug("canceling existing expiring timer because we're past expiration."), this._expiringTimer.cancel();
-      const s = r + 1;
-      t.debug("registering expired timer, raising in", s, "seconds"), this._expiredTimer.init(s);
+      const r = s + 1;
+      t.debug("registering expired timer, raising in", r, "seconds"), this._expiredTimer.init(r);
     } else
       this._expiringTimer.cancel(), this._expiredTimer.cancel();
   }
@@ -577,12 +577,12 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   removeAccessTokenExpired(e) {
     this._expiredTimer.removeHandler(e);
   }
-}, Ne = class {
-  constructor(e, t, r, s, i) {
-    this._callback = e, this._client_id = t, this._intervalInSeconds = s, this._stopOnError = i, this._logger = new f("CheckSessionIFrame"), this._timer = null, this._session_state = null, this._message = (o) => {
+}, qe = class {
+  constructor(e, t, s, r, i) {
+    this._callback = e, this._client_id = t, this._intervalInSeconds = r, this._stopOnError = i, this._logger = new f("CheckSessionIFrame"), this._timer = null, this._session_state = null, this._message = (o) => {
       o.origin === this._frame_origin && o.source === this._frame.contentWindow && (o.data === "error" ? (this._logger.error("error message from check session op iframe"), this._stopOnError && this.stop()) : o.data === "changed" ? (this._logger.debug("changed message from check session op iframe"), this.stop(), this._callback()) : this._logger.debug(o.data + " message from check session op iframe"));
     };
-    const n = new URL(r);
+    const n = new URL(s);
     this._frame_origin = n.origin, this._frame = window.document.createElement("iframe"), this._frame.style.visibility = "hidden", this._frame.style.position = "fixed", this._frame.style.left = "-1000px", this._frame.style.top = "0", this._frame.width = "0", this._frame.height = "0", this._frame.src = n.href;
   }
   load() {
@@ -604,7 +604,7 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   stop() {
     this._logger.create("stop"), this._session_state = null, this._timer && (clearInterval(this._timer), this._timer = null);
   }
-}, le = class {
+}, he = class {
   constructor() {
     this._logger = new f("InMemoryWebStorage"), this._data = {};
   }
@@ -626,89 +626,90 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   key(e) {
     return Object.getOwnPropertyNames(this._data)[e];
   }
-}, G = class {
+}, Y = class {
   constructor(e = [], t = null) {
     this._jwtHandler = t, this._logger = new f("JsonService"), this._contentTypes = [], this._contentTypes.push(...e, "application/json"), t && this._contentTypes.push("application/jwt");
   }
   async fetchWithTimeout(e, t = {}) {
-    const { timeoutInSeconds: r, ...s } = t;
-    if (!r)
-      return await fetch(e, s);
-    const i = new AbortController(), n = setTimeout(() => i.abort(), r * 1e3);
+    const { timeoutInSeconds: s, ...r } = t;
+    if (!s)
+      return await fetch(e, r);
+    const i = new AbortController(), n = setTimeout(() => i.abort(), s * 1e3);
     try {
       return await fetch(e, {
         ...t,
         signal: i.signal
       });
     } catch (o) {
-      throw o instanceof DOMException && o.name === "AbortError" ? new V("Network timed out") : o;
+      throw o instanceof DOMException && o.name === "AbortError" ? new X("Network timed out") : o;
     } finally {
       clearTimeout(n);
     }
   }
   async getJson(e, {
-    token: t
+    token: t,
+    credentials: s
   } = {}) {
-    const r = this._logger.create("getJson"), s = {
+    const r = this._logger.create("getJson"), i = {
       Accept: this._contentTypes.join(", ")
     };
-    t && (r.debug("token passed, setting Authorization header"), s.Authorization = "Bearer " + t);
-    let i;
+    t && (r.debug("token passed, setting Authorization header"), i.Authorization = "Bearer " + t);
+    let n;
     try {
-      r.debug("url:", e), i = await this.fetchWithTimeout(e, { method: "GET", headers: s });
+      r.debug("url:", e), n = await this.fetchWithTimeout(e, { method: "GET", headers: i, credentials: s });
     } catch (c) {
       throw r.error("Network Error"), c;
     }
-    r.debug("HTTP response received, status", i.status);
-    const n = i.headers.get("Content-Type");
-    if (n && !this._contentTypes.find((c) => n.startsWith(c)) && r.throw(new Error(`Invalid response Content-Type: ${n != null ? n : "undefined"}, from URL: ${e}`)), i.ok && this._jwtHandler && (n == null ? void 0 : n.startsWith("application/jwt")))
-      return await this._jwtHandler(await i.text());
-    let o;
+    r.debug("HTTP response received, status", n.status);
+    const o = n.headers.get("Content-Type");
+    if (o && !this._contentTypes.find((c) => o.startsWith(c)) && r.throw(new Error(`Invalid response Content-Type: ${o != null ? o : "undefined"}, from URL: ${e}`)), n.ok && this._jwtHandler && (o == null ? void 0 : o.startsWith("application/jwt")))
+      return await this._jwtHandler(await n.text());
+    let l;
     try {
-      o = await i.json();
+      l = await n.json();
     } catch (c) {
-      throw r.error("Error parsing JSON response", c), i.ok ? c : new Error(`${i.statusText} (${i.status})`);
+      throw r.error("Error parsing JSON response", c), n.ok ? c : new Error(`${n.statusText} (${n.status})`);
     }
-    if (!i.ok)
-      throw r.error("Error from server:", o), o.error ? new M(o) : new Error(`${i.statusText} (${i.status}): ${JSON.stringify(o)}`);
-    return o;
+    if (!n.ok)
+      throw r.error("Error from server:", l), l.error ? new M(l) : new Error(`${n.statusText} (${n.status}): ${JSON.stringify(l)}`);
+    return l;
   }
   async postForm(e, {
     body: t,
-    basicAuth: r,
-    timeoutInSeconds: s,
+    basicAuth: s,
+    timeoutInSeconds: r,
     initCredentials: i
   }) {
     const n = this._logger.create("postForm"), o = {
       Accept: this._contentTypes.join(", "),
       "Content-Type": "application/x-www-form-urlencoded"
     };
-    r !== void 0 && (o.Authorization = "Basic " + r);
-    let c;
+    s !== void 0 && (o.Authorization = "Basic " + s);
+    let l;
     try {
-      n.debug("url:", e), c = await this.fetchWithTimeout(e, { method: "POST", headers: o, body: t, timeoutInSeconds: s, credentials: i });
+      n.debug("url:", e), l = await this.fetchWithTimeout(e, { method: "POST", headers: o, body: t, timeoutInSeconds: r, credentials: i });
     } catch (g) {
       throw n.error("Network error"), g;
     }
-    n.debug("HTTP response received, status", c.status);
-    const l = c.headers.get("Content-Type");
-    if (l && !this._contentTypes.find((g) => l.startsWith(g)))
-      throw new Error(`Invalid response Content-Type: ${l != null ? l : "undefined"}, from URL: ${e}`);
-    const u = await c.text();
-    let p = {};
+    n.debug("HTTP response received, status", l.status);
+    const c = l.headers.get("Content-Type");
+    if (c && !this._contentTypes.find((g) => c.startsWith(g)))
+      throw new Error(`Invalid response Content-Type: ${c != null ? c : "undefined"}, from URL: ${e}`);
+    const u = await l.text();
+    let _ = {};
     if (u)
       try {
-        p = JSON.parse(u);
+        _ = JSON.parse(u);
       } catch (g) {
-        throw n.error("Error parsing JSON response", g), c.ok ? g : new Error(`${c.statusText} (${c.status})`);
+        throw n.error("Error parsing JSON response", g), l.ok ? g : new Error(`${l.statusText} (${l.status})`);
       }
-    if (!c.ok)
-      throw n.error("Error from server:", p), p.error ? new M(p, t) : new Error(`${c.statusText} (${c.status}): ${JSON.stringify(p)}`);
-    return p;
+    if (!l.ok)
+      throw n.error("Error from server:", _), _.error ? new M(_, t) : new Error(`${l.statusText} (${l.status}): ${JSON.stringify(_)}`);
+    return _;
   }
-}, qe = class {
+}, Ne = class {
   constructor(e) {
-    this._settings = e, this._logger = new f("MetadataService"), this._jsonService = new G(["application/jwk-set+json"]), this._signingKeys = null, this._metadata = null, this._metadataUrl = this._settings.metadataUrl, this._settings.signingKeys && (this._logger.debug("using signingKeys from settings"), this._signingKeys = this._settings.signingKeys), this._settings.metadata && (this._logger.debug("using metadata from settings"), this._metadata = this._settings.metadata);
+    this._settings = e, this._logger = new f("MetadataService"), this._jsonService = new Y(["application/jwk-set+json"]), this._signingKeys = null, this._metadata = null, this._metadataUrl = this._settings.metadataUrl, this._settings.signingKeys && (this._logger.debug("using signingKeys from settings"), this._signingKeys = this._settings.signingKeys), this._settings.metadata && (this._logger.debug("using metadata from settings"), this._metadata = this._settings.metadata), this._settings.fetchRequestCredentials && (this._logger.debug("using fetchRequestCredentials from settings"), this._fetchRequestCredentials = this._settings.fetchRequestCredentials);
   }
   resetSigningKeys() {
     this._signingKeys = null;
@@ -720,7 +721,7 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     if (!this._metadataUrl)
       throw e.throw(new Error("No authority or metadataUrl configured on settings")), null;
     e.debug("getting metadata from", this._metadataUrl);
-    const t = await this._jsonService.getJson(this._metadataUrl);
+    const t = await this._jsonService.getJson(this._metadataUrl, { credentials: this._fetchRequestCredentials });
     return e.debug("merging remote JSON with seed metadata"), this._metadata = Object.assign({}, this._settings.metadataSeed, t), this._metadata;
   }
   getIssuer() {
@@ -748,15 +749,15 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     return this._getMetadataProperty("jwks_uri", e);
   }
   async _getMetadataProperty(e, t = !1) {
-    const r = this._logger.create(`_getMetadataProperty('${e}')`), s = await this.getMetadata();
-    if (r.debug("resolved"), s[e] === void 0) {
+    const s = this._logger.create(`_getMetadataProperty('${e}')`), r = await this.getMetadata();
+    if (s.debug("resolved"), r[e] === void 0) {
       if (t === !0) {
-        r.warn("Metadata does not contain optional property");
+        s.warn("Metadata does not contain optional property");
         return;
       }
-      r.throw(new Error("Metadata does not contain property " + e));
+      s.throw(new Error("Metadata does not contain property " + e));
     }
-    return s[e];
+    return r[e];
   }
   async getSigningKeys() {
     const e = this._logger.create("getSigningKeys");
@@ -764,50 +765,51 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
       return e.debug("returning signingKeys from cache"), this._signingKeys;
     const t = await this.getKeysEndpoint(!1);
     e.debug("got jwks_uri", t);
-    const r = await this._jsonService.getJson(t);
-    if (e.debug("got key set", r), !Array.isArray(r.keys))
+    const s = await this._jsonService.getJson(t);
+    if (e.debug("got key set", s), !Array.isArray(s.keys))
       throw e.throw(new Error("Missing keys on keyset")), null;
-    return this._signingKeys = r.keys, this._signingKeys;
+    return this._signingKeys = s.keys, this._signingKeys;
   }
-}, de = class {
-  constructor({ prefix: e = "oidc.", store: t = localStorage } = {}) {
+}, ge = class {
+  constructor({
+    prefix: e = "oidc.",
+    store: t = localStorage
+  } = {}) {
     this._logger = new f("WebStorageStateStore"), this._store = t, this._prefix = e;
   }
-  set(e, t) {
-    return this._logger.create(`set('${e}')`), e = this._prefix + e, this._store.setItem(e, t), Promise.resolve();
+  async set(e, t) {
+    this._logger.create(`set('${e}')`), e = this._prefix + e, await this._store.setItem(e, t);
   }
-  get(e) {
-    this._logger.create(`get('${e}')`), e = this._prefix + e;
-    const t = this._store.getItem(e);
-    return Promise.resolve(t);
+  async get(e) {
+    return this._logger.create(`get('${e}')`), e = this._prefix + e, await this._store.getItem(e);
   }
-  remove(e) {
+  async remove(e) {
     this._logger.create(`remove('${e}')`), e = this._prefix + e;
-    const t = this._store.getItem(e);
-    return this._store.removeItem(e), Promise.resolve(t);
+    const t = await this._store.getItem(e);
+    return await this._store.removeItem(e), t;
   }
-  getAllKeys() {
+  async getAllKeys() {
     this._logger.create("getAllKeys");
-    const e = [];
-    for (let t = 0; t < this._store.length; t++) {
-      const r = this._store.key(t);
-      r && r.indexOf(this._prefix) === 0 && e.push(r.substr(this._prefix.length));
+    const e = await this._store.length, t = [];
+    for (let s = 0; s < e; s++) {
+      const r = await this._store.key(s);
+      r && r.indexOf(this._prefix) === 0 && t.push(r.substr(this._prefix.length));
     }
-    return Promise.resolve(e);
+    return t;
   }
-}, Me = "code", He = "openid", je = "client_secret_post", We = "query", Be = 60 * 15, $e = 60 * 5, he = class {
+}, Me = "code", He = "openid", je = "client_secret_post", Be = "query", We = 60 * 15, Fe = 60 * 5, ue = class {
   constructor({
     authority: e,
     metadataUrl: t,
-    metadata: r,
-    signingKeys: s,
+    metadata: s,
+    signingKeys: r,
     metadataSeed: i,
     client_id: n,
     client_secret: o,
-    response_type: c = Me,
-    scope: l = He,
+    response_type: l = Me,
+    scope: c = He,
     redirect_uri: u,
-    post_logout_redirect_uri: p,
+    post_logout_redirect_uri: _,
     client_authentication: g = je,
     prompt: S,
     display: w,
@@ -815,119 +817,150 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     ui_locales: h,
     acr_values: v,
     resource: E,
-    response_mode: a = We,
+    response_mode: a = Be,
     filterProtocolClaims: d = !0,
-    loadUserInfo: _ = !1,
-    staleStateAgeInSeconds: m = Be,
-    clockSkewInSeconds: y = $e,
+    loadUserInfo: p = !1,
+    staleStateAgeInSeconds: m = We,
+    clockSkewInSeconds: y = Fe,
     userInfoJwtIssuer: k = "OP",
-    mergeClaims: x = !1,
-    stateStore: T,
-    refreshTokenCredentials: O = "same-origin",
-    extraQueryParams: I = {},
-    extraTokenParams: N = {}
+    mergeClaims: T = !1,
+    stateStore: R,
+    refreshTokenCredentials: C,
+    revokeTokenAdditionalContentTypes: I,
+    fetchRequestCredentials: A,
+    extraQueryParams: $ = {},
+    extraTokenParams: L = {}
   }) {
-    if (this.authority = e, t ? this.metadataUrl = t : (this.metadataUrl = e, e && (this.metadataUrl.endsWith("/") || (this.metadataUrl += "/"), this.metadataUrl += ".well-known/openid-configuration")), this.metadata = r, this.metadataSeed = i, this.signingKeys = s, this.client_id = n, this.client_secret = o, this.response_type = c, this.scope = l, this.redirect_uri = u, this.post_logout_redirect_uri = p, this.client_authentication = g, this.prompt = S, this.display = w, this.max_age = b, this.ui_locales = h, this.acr_values = v, this.resource = E, this.response_mode = a, this.filterProtocolClaims = !!d, this.loadUserInfo = !!_, this.staleStateAgeInSeconds = m, this.clockSkewInSeconds = y, this.userInfoJwtIssuer = k, this.mergeClaims = !!x, this.refreshTokenCredentials = O, T)
-      this.stateStore = T;
+    if (this.authority = e, t ? this.metadataUrl = t : (this.metadataUrl = e, e && (this.metadataUrl.endsWith("/") || (this.metadataUrl += "/"), this.metadataUrl += ".well-known/openid-configuration")), this.metadata = s, this.metadataSeed = i, this.signingKeys = r, this.client_id = n, this.client_secret = o, this.response_type = l, this.scope = c, this.redirect_uri = u, this.post_logout_redirect_uri = _, this.client_authentication = g, this.prompt = S, this.display = w, this.max_age = b, this.ui_locales = h, this.acr_values = v, this.resource = E, this.response_mode = a, this.filterProtocolClaims = !!d, this.loadUserInfo = !!p, this.staleStateAgeInSeconds = m, this.clockSkewInSeconds = y, this.userInfoJwtIssuer = k, this.mergeClaims = !!T, this.revokeTokenAdditionalContentTypes = I, A && C && console.warn("Both fetchRequestCredentials and refreshTokenCredentials is set. Only fetchRequestCredentials will be used."), this.fetchRequestCredentials = A || C || "same-origin", R)
+      this.stateStore = R;
     else {
-      const F = typeof window < "u" ? window.localStorage : new le();
-      this.stateStore = new de({ store: F });
+      const D = typeof window < "u" ? window.localStorage : new he();
+      this.stateStore = new ge({ store: D });
     }
-    this.extraQueryParams = I, this.extraTokenParams = N;
+    this.extraQueryParams = $, this.extraTokenParams = L;
   }
-}, Fe = class {
-  constructor(e) {
-    this._metadataService = e, this._logger = new f("UserInfoService"), this._getClaimsFromJwt = async (t) => {
+}, $e = class {
+  constructor(e, t) {
+    this._settings = e, this._metadataService = t, this._logger = new f("UserInfoService"), this._getClaimsFromJwt = async (s) => {
       const r = this._logger.create("_getClaimsFromJwt");
       try {
-        const s = z.decode(t);
-        return r.debug("JWT decoding successful"), s;
-      } catch (s) {
-        throw r.error("Error parsing JWT response"), s;
+        const i = V.decode(s);
+        return r.debug("JWT decoding successful"), i;
+      } catch (i) {
+        throw r.error("Error parsing JWT response"), i;
       }
-    }, this._jsonService = new G(void 0, this._getClaimsFromJwt);
+    }, this._jsonService = new Y(void 0, this._getClaimsFromJwt);
   }
   async getClaims(e) {
     const t = this._logger.create("getClaims");
     e || this._logger.throw(new Error("No token passed"));
-    const r = await this._metadataService.getUserInfoEndpoint();
-    t.debug("got userinfo url", r);
-    const s = await this._jsonService.getJson(r, { token: e });
-    return t.debug("got claims", s), s;
+    const s = await this._metadataService.getUserInfoEndpoint();
+    t.debug("got userinfo url", s);
+    const r = await this._jsonService.getJson(s, {
+      token: e,
+      credentials: this._settings.fetchRequestCredentials
+    });
+    return t.debug("got claims", r), r;
   }
-}, ge = class {
+}, _e = class {
   constructor(e, t) {
-    this._settings = e, this._metadataService = t, this._logger = new f("TokenClient"), this._jsonService = new G();
+    this._settings = e, this._metadataService = t, this._logger = new f("TokenClient"), this._jsonService = new Y(this._settings.revokeTokenAdditionalContentTypes);
   }
   async exchangeCode({
     grant_type: e = "authorization_code",
     redirect_uri: t = this._settings.redirect_uri,
-    client_id: r = this._settings.client_id,
-    client_secret: s = this._settings.client_secret,
+    client_id: s = this._settings.client_id,
+    client_secret: r = this._settings.client_secret,
     ...i
   }) {
     const n = this._logger.create("exchangeCode");
-    r || n.throw(new Error("A client_id is required")), t || n.throw(new Error("A redirect_uri is required")), i.code || n.throw(new Error("A code is required")), i.code_verifier || n.throw(new Error("A code_verifier is required"));
+    s || n.throw(new Error("A client_id is required")), t || n.throw(new Error("A redirect_uri is required")), i.code || n.throw(new Error("A code is required")), i.code_verifier || n.throw(new Error("A code_verifier is required"));
     const o = new URLSearchParams({ grant_type: e, redirect_uri: t });
-    for (const [p, g] of Object.entries(i))
-      g != null && o.set(p, g);
-    let c;
-    switch (this._settings.client_authentication) {
-      case "client_secret_basic":
-        if (!s)
-          throw n.throw(new Error("A client_secret is required")), null;
-        c = P.generateBasicAuth(r, s);
-        break;
-      case "client_secret_post":
-        o.append("client_id", r), s && o.append("client_secret", s);
-        break;
-    }
-    const l = await this._metadataService.getTokenEndpoint(!1);
-    n.debug("got token endpoint");
-    const u = await this._jsonService.postForm(l, { body: o, basicAuth: c });
-    return n.debug("got response"), u;
-  }
-  async exchangeRefreshToken({
-    grant_type: e = "refresh_token",
-    client_id: t = this._settings.client_id,
-    client_secret: r = this._settings.client_secret,
-    timeoutInSeconds: s,
-    refreshTokenCredentials: i,
-    ...n
-  }) {
-    const o = this._logger.create("exchangeRefreshToken");
-    t || o.throw(new Error("A client_id is required")), n.refresh_token || o.throw(new Error("A refresh_token is required"));
-    const c = new URLSearchParams({ grant_type: e });
-    for (const [g, S] of Object.entries(n))
-      S != null && c.set(g, S);
+    for (const [_, g] of Object.entries(i))
+      g != null && o.set(_, g);
     let l;
     switch (this._settings.client_authentication) {
       case "client_secret_basic":
         if (!r)
-          throw o.throw(new Error("A client_secret is required")), null;
-        l = P.generateBasicAuth(t, r);
+          throw n.throw(new Error("A client_secret is required")), null;
+        l = O.generateBasicAuth(s, r);
         break;
       case "client_secret_post":
-        c.append("client_id", t), r && c.append("client_secret", r);
+        o.append("client_id", s), r && o.append("client_secret", r);
+        break;
+    }
+    const c = await this._metadataService.getTokenEndpoint(!1);
+    n.debug("got token endpoint");
+    const u = await this._jsonService.postForm(c, { body: o, basicAuth: l, initCredentials: this._settings.fetchRequestCredentials });
+    return n.debug("got response"), u;
+  }
+  async exchangeCredentials({
+    grant_type: e = "password",
+    client_id: t = this._settings.client_id,
+    client_secret: s = this._settings.client_secret,
+    scope: r = this._settings.scope,
+    username: i,
+    password: n
+  }) {
+    const o = this._logger.create("exchangeCredentials");
+    t || o.throw(new Error("A client_id is required"));
+    const l = new URLSearchParams({ grant_type: e, username: i, password: n, scope: r });
+    let c;
+    switch (this._settings.client_authentication) {
+      case "client_secret_basic":
+        if (!s)
+          throw o.throw(new Error("A client_secret is required")), null;
+        c = O.generateBasicAuth(t, s);
+        break;
+      case "client_secret_post":
+        l.append("client_id", t), s && l.append("client_secret", s);
         break;
     }
     const u = await this._metadataService.getTokenEndpoint(!1);
     o.debug("got token endpoint");
-    const p = await this._jsonService.postForm(u, { body: c, basicAuth: l, timeoutInSeconds: s, initCredentials: i });
-    return o.debug("got response"), p;
+    const _ = await this._jsonService.postForm(u, { body: l, basicAuth: c, initCredentials: this._settings.fetchRequestCredentials });
+    return o.debug("got response"), _;
+  }
+  async exchangeRefreshToken({
+    grant_type: e = "refresh_token",
+    client_id: t = this._settings.client_id,
+    client_secret: s = this._settings.client_secret,
+    timeoutInSeconds: r,
+    ...i
+  }) {
+    const n = this._logger.create("exchangeRefreshToken");
+    t || n.throw(new Error("A client_id is required")), i.refresh_token || n.throw(new Error("A refresh_token is required"));
+    const o = new URLSearchParams({ grant_type: e });
+    for (const [_, g] of Object.entries(i))
+      g != null && o.set(_, g);
+    let l;
+    switch (this._settings.client_authentication) {
+      case "client_secret_basic":
+        if (!s)
+          throw n.throw(new Error("A client_secret is required")), null;
+        l = O.generateBasicAuth(t, s);
+        break;
+      case "client_secret_post":
+        o.append("client_id", t), s && o.append("client_secret", s);
+        break;
+    }
+    const c = await this._metadataService.getTokenEndpoint(!1);
+    n.debug("got token endpoint");
+    const u = await this._jsonService.postForm(c, { body: o, basicAuth: l, timeoutInSeconds: r, initCredentials: this._settings.fetchRequestCredentials });
+    return n.debug("got response"), u;
   }
   async revoke(e) {
     var t;
-    const r = this._logger.create("revoke");
-    e.token || r.throw(new Error("A token is required"));
-    const s = await this._metadataService.getRevocationEndpoint(!1);
-    r.debug(`got revocation endpoint, revoking ${(t = e.token_type_hint) != null ? t : "default token type"}`);
+    const s = this._logger.create("revoke");
+    e.token || s.throw(new Error("A token is required"));
+    const r = await this._metadataService.getRevocationEndpoint(!1);
+    s.debug(`got revocation endpoint, revoking ${(t = e.token_type_hint) != null ? t : "default token type"}`);
     const i = new URLSearchParams();
     for (const [n, o] of Object.entries(e))
       o != null && i.set(n, o);
-    i.set("client_id", this._settings.client_id), this._settings.client_secret && i.set("client_secret", this._settings.client_secret), await this._jsonService.postForm(s, { body: i }), r.debug("got response");
+    i.set("client_id", this._settings.client_id), this._settings.client_secret && i.set("client_secret", this._settings.client_secret), await this._jsonService.postForm(r, { body: i }), s.debug("got response");
   }
-}, De = [
+}, Le = [
   "iss",
   "aud",
   "exp",
@@ -940,64 +973,68 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   "amr",
   "azp",
   "at_hash"
-], Le = class {
+], De = class {
   constructor(e, t) {
-    this._settings = e, this._metadataService = t, this._logger = new f("ResponseValidator"), this._userInfoService = new Fe(this._metadataService), this._tokenClient = new ge(this._settings, this._metadataService);
+    this._settings = e, this._metadataService = t, this._logger = new f("ResponseValidator"), this._userInfoService = new $e(this._settings, this._metadataService), this._tokenClient = new _e(this._settings, this._metadataService);
   }
   async validateSigninResponse(e, t) {
-    const r = this._logger.create("validateSigninResponse");
-    this._processSigninState(e, t), r.debug("state processed"), await this._processCode(e, t), r.debug("code processed"), e.isOpenId && this._validateIdTokenAttributes(e), r.debug("tokens validated"), await this._processClaims(e, t == null ? void 0 : t.skipUserInfo, e.isOpenId), r.debug("claims processed");
+    const s = this._logger.create("validateSigninResponse");
+    this._processSigninState(e, t), s.debug("state processed"), await this._processCode(e, t), s.debug("code processed"), e.isOpenId && this._validateIdTokenAttributes(e), s.debug("tokens validated"), await this._processClaims(e, t == null ? void 0 : t.skipUserInfo, e.isOpenId), s.debug("claims processed");
+  }
+  async validateCredentialsResponse(e, t) {
+    const s = this._logger.create("validateCredentialsResponse");
+    e.isOpenId && this._validateIdTokenAttributes(e), s.debug("tokens validated"), await this._processClaims(e, t, e.isOpenId), s.debug("claims processed");
   }
   async validateRefreshResponse(e, t) {
-    var r, s;
+    var s, r;
     const i = this._logger.create("validateRefreshResponse");
-    e.userState = t.data, (r = e.session_state) != null || (e.session_state = t.session_state), (s = e.scope) != null || (e.scope = t.scope);
+    e.userState = t.data, (s = e.session_state) != null || (e.session_state = t.session_state), (r = e.scope) != null || (e.scope = t.scope), e.isOpenId && !!e.id_token && (this._validateIdTokenAttributes(e, t.id_token), i.debug("ID Token validated")), e.id_token || (e.id_token = t.id_token, e.profile = t.profile);
     const n = e.isOpenId && !!e.id_token;
-    n && (this._validateIdTokenAttributes(e, t.id_token), i.debug("ID Token validated")), await this._processClaims(e, !1, n), i.debug("claims processed");
+    await this._processClaims(e, !1, n), i.debug("claims processed");
   }
   validateSignoutResponse(e, t) {
-    const r = this._logger.create("validateSignoutResponse");
-    if (t.id !== e.state && r.throw(new Error("State does not match")), r.debug("state validated"), e.userState = t.data, e.error)
-      throw r.warn("Response was error", e.error), new M(e);
+    const s = this._logger.create("validateSignoutResponse");
+    if (t.id !== e.state && s.throw(new Error("State does not match")), s.debug("state validated"), e.userState = t.data, e.error)
+      throw s.warn("Response was error", e.error), new M(e);
   }
   _processSigninState(e, t) {
-    var r;
-    const s = this._logger.create("_processSigninState");
-    if (t.id !== e.state && s.throw(new Error("State does not match")), t.client_id || s.throw(new Error("No client_id on state")), t.authority || s.throw(new Error("No authority on state")), this._settings.authority !== t.authority && s.throw(new Error("authority mismatch on settings vs. signin state")), this._settings.client_id && this._settings.client_id !== t.client_id && s.throw(new Error("client_id mismatch on settings vs. signin state")), s.debug("state validated"), e.userState = t.data, (r = e.scope) != null || (e.scope = t.scope), e.error)
-      throw s.warn("Response was error", e.error), new M(e);
-    t.code_verifier && !e.code && s.throw(new Error("Expected code in response")), !t.code_verifier && e.code && s.throw(new Error("Unexpected code in response"));
+    var s;
+    const r = this._logger.create("_processSigninState");
+    if (t.id !== e.state && r.throw(new Error("State does not match")), t.client_id || r.throw(new Error("No client_id on state")), t.authority || r.throw(new Error("No authority on state")), this._settings.authority !== t.authority && r.throw(new Error("authority mismatch on settings vs. signin state")), this._settings.client_id && this._settings.client_id !== t.client_id && r.throw(new Error("client_id mismatch on settings vs. signin state")), r.debug("state validated"), e.userState = t.data, (s = e.scope) != null || (e.scope = t.scope), e.error)
+      throw r.warn("Response was error", e.error), new M(e);
+    t.code_verifier && !e.code && r.throw(new Error("Expected code in response")), !t.code_verifier && e.code && r.throw(new Error("Unexpected code in response"));
   }
-  async _processClaims(e, t = !1, r = !0) {
-    const s = this._logger.create("_processClaims");
+  async _processClaims(e, t = !1, s = !0) {
+    const r = this._logger.create("_processClaims");
     if (e.profile = this._filterProtocolClaims(e.profile), t || !this._settings.loadUserInfo || !e.access_token) {
-      s.debug("not loading user info");
+      r.debug("not loading user info");
       return;
     }
-    s.debug("loading user info");
+    r.debug("loading user info");
     const i = await this._userInfoService.getClaims(e.access_token);
-    s.debug("user info claims received from user info endpoint"), r && i.sub !== e.profile.sub && s.throw(new Error("subject from UserInfo response does not match subject in ID Token")), e.profile = this._mergeClaims(e.profile, this._filterProtocolClaims(i)), s.debug("user info claims received, updated profile:", e.profile);
+    r.debug("user info claims received from user info endpoint"), s && i.sub !== e.profile.sub && r.throw(new Error("subject from UserInfo response does not match subject in ID Token")), e.profile = this._mergeClaims(e.profile, this._filterProtocolClaims(i)), r.debug("user info claims received, updated profile:", e.profile);
   }
   _mergeClaims(e, t) {
-    const r = { ...e };
-    for (const [s, i] of Object.entries(t))
+    const s = { ...e };
+    for (const [r, i] of Object.entries(t))
       for (const n of Array.isArray(i) ? i : [i]) {
-        const o = r[s];
-        o ? Array.isArray(o) ? o.includes(n) || o.push(n) : r[s] !== n && (typeof n == "object" && this._settings.mergeClaims ? r[s] = this._mergeClaims(o, n) : r[s] = [o, n]) : r[s] = n;
+        const o = s[r];
+        o ? Array.isArray(o) ? o.includes(n) || o.push(n) : s[r] !== n && (typeof n == "object" && this._settings.mergeClaims ? s[r] = this._mergeClaims(o, n) : s[r] = [o, n]) : s[r] = n;
       }
-    return r;
+    return s;
   }
   _filterProtocolClaims(e) {
     const t = { ...e };
     if (this._settings.filterProtocolClaims)
-      for (const r of De)
-        delete t[r];
+      for (const s of Le)
+        delete t[s];
     return t;
   }
   async _processCode(e, t) {
-    const r = this._logger.create("_processCode");
+    const s = this._logger.create("_processCode");
     if (e.code) {
-      r.debug("Validating code");
-      const s = await this._tokenClient.exchangeCode({
+      s.debug("Validating code");
+      const r = await this._tokenClient.exchangeCode({
         client_id: t.client_id,
         client_secret: t.client_secret,
         code: e.code,
@@ -1005,24 +1042,24 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
         code_verifier: t.code_verifier,
         ...t.extraTokenParams
       });
-      Object.assign(e, s);
+      Object.assign(e, r);
     } else
-      r.debug("No code to process");
+      s.debug("No code to process");
   }
   _validateIdTokenAttributes(e, t) {
-    var r;
-    const s = this._logger.create("_validateIdTokenAttributes");
-    s.debug("decoding ID Token JWT");
-    const i = z.decode((r = e.id_token) != null ? r : "");
-    if (i.sub || s.throw(new Error("ID Token is missing a subject claim")), t) {
-      const n = z.decode(t);
-      n.sub !== i.sub && s.throw(new Error("sub in id_token does not match current sub")), n.auth_time && n.auth_time !== i.auth_time && s.throw(new Error("auth_time in id_token does not match original auth_time")), n.azp && n.azp !== i.azp && s.throw(new Error("azp in id_token does not match original azp")), !n.azp && i.azp && s.throw(new Error("azp not in id_token, but present in original id_token"));
+    var s;
+    const r = this._logger.create("_validateIdTokenAttributes");
+    r.debug("decoding ID Token JWT");
+    const i = V.decode((s = e.id_token) != null ? s : "");
+    if (i.sub || r.throw(new Error("ID Token is missing a subject claim")), t) {
+      const n = V.decode(t);
+      n.sub !== i.sub && r.throw(new Error("sub in id_token does not match current sub")), n.auth_time && n.auth_time !== i.auth_time && r.throw(new Error("auth_time in id_token does not match original auth_time")), n.azp && n.azp !== i.azp && r.throw(new Error("azp in id_token does not match original azp")), !n.azp && i.azp && r.throw(new Error("azp not in id_token, but present in original id_token"));
     }
     e.profile = i;
   }
 }, H = class {
   constructor(e) {
-    this.id = e.id || P.generateUUIDv4(), this.data = e.data, e.created && e.created > 0 ? this.created = e.created : this.created = R.getEpochTime(), this.request_type = e.request_type;
+    this.id = e.id || O.generateUUIDv4(), this.data = e.data, e.created && e.created > 0 ? this.created = e.created : this.created = x.getEpochTime(), this.request_type = e.request_type;
   }
   toStorageString() {
     return new f("State").create("toStorageString"), JSON.stringify({
@@ -1036,26 +1073,26 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     return f.createStatic("State", "fromStorageString"), new H(JSON.parse(e));
   }
   static async clearStaleState(e, t) {
-    const r = f.createStatic("State", "clearStaleState"), s = R.getEpochTime() - t, i = await e.getAllKeys();
-    r.debug("got keys", i);
+    const s = f.createStatic("State", "clearStaleState"), r = x.getEpochTime() - t, i = await e.getAllKeys();
+    s.debug("got keys", i);
     for (let n = 0; n < i.length; n++) {
-      const o = i[n], c = await e.get(o);
-      let l = !1;
-      if (c)
+      const o = i[n], l = await e.get(o);
+      let c = !1;
+      if (l)
         try {
-          const u = H.fromStorageString(c);
-          r.debug("got item from key:", o, u.created), u.created <= s && (l = !0);
+          const u = H.fromStorageString(l);
+          s.debug("got item from key:", o, u.created), u.created <= r && (c = !0);
         } catch (u) {
-          r.error("Error parsing state for key:", o, u), l = !0;
+          s.error("Error parsing state for key:", o, u), c = !0;
         }
       else
-        r.debug("no item in storage for key:", o), l = !0;
-      l && (r.debug("removed item for key:", o), e.remove(o));
+        s.debug("no item in storage for key:", o), c = !0;
+      c && (s.debug("removed item for key:", o), e.remove(o));
     }
   }
-}, Q = class extends H {
+}, Z = class extends H {
   constructor(e) {
-    super(e), e.code_verifier === !0 ? this.code_verifier = P.generateCodeVerifier() : e.code_verifier && (this.code_verifier = e.code_verifier), this.code_verifier && (this.code_challenge = P.generateCodeChallenge(this.code_verifier)), this.authority = e.authority, this.client_id = e.client_id, this.redirect_uri = e.redirect_uri, this.scope = e.scope, this.client_secret = e.client_secret, this.extraTokenParams = e.extraTokenParams, this.response_mode = e.response_mode, this.skipUserInfo = e.skipUserInfo;
+    super(e), e.code_verifier === !0 ? this.code_verifier = O.generateCodeVerifier() : e.code_verifier && (this.code_verifier = e.code_verifier), this.code_verifier && (this.code_challenge = O.generateCodeChallenge(this.code_verifier)), this.authority = e.authority, this.client_id = e.client_id, this.redirect_uri = e.redirect_uri, this.scope = e.scope, this.client_secret = e.client_secret, this.extraTokenParams = e.extraTokenParams, this.response_mode = e.response_mode, this.skipUserInfo = e.skipUserInfo;
   }
   toStorageString() {
     return new f("SigninState").create("toStorageString"), JSON.stringify({
@@ -1077,21 +1114,21 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   static fromStorageString(e) {
     f.createStatic("SigninState", "fromStorageString");
     const t = JSON.parse(e);
-    return new Q(t);
+    return new Z(t);
   }
 }, ze = class {
   constructor({
     url: e,
     authority: t,
-    client_id: r,
-    redirect_uri: s,
+    client_id: s,
+    redirect_uri: r,
     response_type: i,
     scope: n,
     state_data: o,
-    response_mode: c,
-    request_type: l,
+    response_mode: l,
+    request_type: c,
     client_secret: u,
-    nonce: p,
+    nonce: _,
     skipUserInfo: g,
     extraQueryParams: S,
     extraTokenParams: w,
@@ -1099,9 +1136,9 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   }) {
     if (this._logger = new f("SigninRequest"), !e)
       throw this._logger.error("ctor: No url passed"), new Error("url");
-    if (!r)
-      throw this._logger.error("ctor: No client_id passed"), new Error("client_id");
     if (!s)
+      throw this._logger.error("ctor: No client_id passed"), new Error("client_id");
+    if (!r)
       throw this._logger.error("ctor: No redirect_uri passed"), new Error("redirect_uri");
     if (!i)
       throw this._logger.error("ctor: No response_type passed"), new Error("response_type");
@@ -1109,35 +1146,35 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
       throw this._logger.error("ctor: No scope passed"), new Error("scope");
     if (!t)
       throw this._logger.error("ctor: No authority passed"), new Error("authority");
-    this.state = new Q({
+    this.state = new Z({
       data: o,
-      request_type: l,
+      request_type: c,
       code_verifier: !0,
-      client_id: r,
+      client_id: s,
       authority: t,
-      redirect_uri: s,
-      response_mode: c,
+      redirect_uri: r,
+      response_mode: l,
       client_secret: u,
       scope: n,
       extraTokenParams: w,
       skipUserInfo: g
     });
     const h = new URL(e);
-    h.searchParams.append("client_id", r), h.searchParams.append("redirect_uri", s), h.searchParams.append("response_type", i), h.searchParams.append("scope", n), p && h.searchParams.append("nonce", p), h.searchParams.append("state", this.state.id), this.state.code_challenge && (h.searchParams.append("code_challenge", this.state.code_challenge), h.searchParams.append("code_challenge_method", "S256"));
-    for (const [v, E] of Object.entries({ response_mode: c, ...b, ...S }))
+    h.searchParams.append("client_id", s), h.searchParams.append("redirect_uri", r), h.searchParams.append("response_type", i), h.searchParams.append("scope", n), _ && h.searchParams.append("nonce", _), h.searchParams.append("state", this.state.id), this.state.code_challenge && (h.searchParams.append("code_challenge", this.state.code_challenge), h.searchParams.append("code_challenge_method", "S256"));
+    for (const [v, E] of Object.entries({ response_mode: l, ...b, ...S }))
       E != null && h.searchParams.append(v, E.toString());
     this.url = h.href;
   }
-}, Je = "openid", re = class {
+}, Je = "openid", J = class {
   constructor(e) {
     this.access_token = "", this.token_type = "", this.profile = {}, this.state = e.get("state"), this.session_state = e.get("session_state"), this.error = e.get("error"), this.error_description = e.get("error_description"), this.error_uri = e.get("error_uri"), this.code = e.get("code");
   }
   get expires_in() {
     if (this.expires_at !== void 0)
-      return this.expires_at - R.getEpochTime();
+      return this.expires_at - x.getEpochTime();
   }
   set expires_in(e) {
-    typeof e == "string" && (e = Number(e)), e !== void 0 && e >= 0 && (this.expires_at = Math.floor(e) + R.getEpochTime());
+    typeof e == "string" && (e = Number(e)), e !== void 0 && e >= 0 && (this.expires_at = Math.floor(e) + x.getEpochTime());
   }
   get isOpenId() {
     var e;
@@ -1147,17 +1184,17 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   constructor({
     url: e,
     state_data: t,
-    id_token_hint: r,
-    post_logout_redirect_uri: s,
+    id_token_hint: s,
+    post_logout_redirect_uri: r,
     extraQueryParams: i,
     request_type: n
   }) {
     if (this._logger = new f("SignoutRequest"), !e)
       throw this._logger.error("ctor: No url passed"), new Error("url");
     const o = new URL(e);
-    r && o.searchParams.append("id_token_hint", r), s && (o.searchParams.append("post_logout_redirect_uri", s), t && (this.state = new H({ data: t, request_type: n }), o.searchParams.append("state", this.state.id)));
-    for (const [c, l] of Object.entries({ ...i }))
-      l != null && o.searchParams.append(c, l.toString());
+    s && o.searchParams.append("id_token_hint", s), r && (o.searchParams.append("post_logout_redirect_uri", r), t && (this.state = new H({ data: t, request_type: n }), o.searchParams.append("state", this.state.id)));
+    for (const [l, c] of Object.entries({ ...i }))
+      c != null && o.searchParams.append(l, c.toString());
     this.url = o.href;
   }
 }, Ve = class {
@@ -1166,20 +1203,20 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   }
 }, Ge = class {
   constructor(e) {
-    this._logger = new f("OidcClient"), this.settings = new he(e), this.metadataService = new qe(this.settings), this._validator = new Le(this.settings, this.metadataService), this._tokenClient = new ge(this.settings, this.metadataService);
+    this._logger = new f("OidcClient"), this.settings = new ue(e), this.metadataService = new Ne(this.settings), this._validator = new De(this.settings, this.metadataService), this._tokenClient = new _e(this.settings, this.metadataService);
   }
   async createSigninRequest({
     state: e,
     request: t,
-    request_uri: r,
-    request_type: s,
+    request_uri: s,
+    request_type: r,
     id_token_hint: i,
     login_hint: n,
     skipUserInfo: o,
-    nonce: c,
-    response_type: l = this.settings.response_type,
+    nonce: l,
+    response_type: c = this.settings.response_type,
     scope: u = this.settings.scope,
-    redirect_uri: p = this.settings.redirect_uri,
+    redirect_uri: _ = this.settings.redirect_uri,
     prompt: g = this.settings.prompt,
     display: S = this.settings.display,
     max_age: w = this.settings.max_age,
@@ -1190,17 +1227,17 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     extraQueryParams: a = this.settings.extraQueryParams,
     extraTokenParams: d = this.settings.extraTokenParams
   }) {
-    const _ = this._logger.create("createSigninRequest");
-    if (l !== "code")
+    const p = this._logger.create("createSigninRequest");
+    if (c !== "code")
       throw new Error("Only the Authorization Code flow (with PKCE) is supported");
     const m = await this.metadataService.getAuthorizationEndpoint();
-    _.debug("Received authorization endpoint", m);
+    p.debug("Received authorization endpoint", m);
     const y = new ze({
       url: m,
       authority: this.settings.authority,
       client_id: this.settings.client_id,
-      redirect_uri: p,
-      response_type: l,
+      redirect_uri: _,
+      response_type: c,
       scope: u,
       state_data: e,
       prompt: g,
@@ -1212,82 +1249,89 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
       acr_values: h,
       resource: v,
       request: t,
-      request_uri: r,
+      request_uri: s,
       extraQueryParams: a,
       extraTokenParams: d,
-      request_type: s,
+      request_type: r,
       response_mode: E,
       client_secret: this.settings.client_secret,
       skipUserInfo: o,
-      nonce: c
+      nonce: l
     });
     await this.clearStaleState();
     const k = y.state;
     return await this.settings.stateStore.set(k.id, k.toStorageString()), y;
   }
   async readSigninResponseState(e, t = !1) {
-    const r = this._logger.create("readSigninResponseState"), s = new re(J.readParams(e, this.settings.response_mode));
-    if (!s.state)
-      throw r.throw(new Error("No state in response")), null;
-    const i = await this.settings.stateStore[t ? "remove" : "get"](s.state);
+    const s = this._logger.create("readSigninResponseState"), r = new J(G.readParams(e, this.settings.response_mode));
+    if (!r.state)
+      throw s.throw(new Error("No state in response")), null;
+    const i = await this.settings.stateStore[t ? "remove" : "get"](r.state);
     if (!i)
-      throw r.throw(new Error("No matching state found in storage")), null;
-    return { state: Q.fromStorageString(i), response: s };
+      throw s.throw(new Error("No matching state found in storage")), null;
+    return { state: Z.fromStorageString(i), response: r };
   }
   async processSigninResponse(e) {
-    const t = this._logger.create("processSigninResponse"), { state: r, response: s } = await this.readSigninResponseState(e, !0);
-    return t.debug("received state from storage; validating response"), await this._validator.validateSigninResponse(s, r), s;
+    const t = this._logger.create("processSigninResponse"), { state: s, response: r } = await this.readSigninResponseState(e, !0);
+    return t.debug("received state from storage; validating response"), await this._validator.validateSigninResponse(r, s), r;
+  }
+  async processResourceOwnerPasswordCredentials({
+    username: e,
+    password: t,
+    skipUserInfo: s = !1
+  }) {
+    const r = await this._tokenClient.exchangeCredentials({ username: e, password: t }), i = new J(new URLSearchParams());
+    return Object.assign(i, r), await this._validator.validateCredentialsResponse(i, s), i;
   }
   async useRefreshToken({
     state: e,
     timeoutInSeconds: t
   }) {
-    const r = this._logger.create("useRefreshToken"), s = await this._tokenClient.exchangeRefreshToken({
+    const s = this._logger.create("useRefreshToken"), r = await this._tokenClient.exchangeRefreshToken({
       refresh_token: e.refresh_token,
       scope: e.scope,
-      timeoutInSeconds: t,
-      refreshTokenCredentials: this.settings.refreshTokenCredentials
-    }), i = new re(new URLSearchParams());
-    return Object.assign(i, s), r.debug("validating response", i), await this._validator.validateRefreshResponse(i, e), i;
+      timeoutInSeconds: t
+    }), i = new J(new URLSearchParams());
+    return Object.assign(i, r), s.debug("validating response", i), await this._validator.validateRefreshResponse(i, e), i;
   }
   async createSignoutRequest({
     state: e,
     id_token_hint: t,
-    request_type: r,
-    post_logout_redirect_uri: s = this.settings.post_logout_redirect_uri,
+    request_type: s,
+    post_logout_redirect_uri: r = this.settings.post_logout_redirect_uri,
     extraQueryParams: i = this.settings.extraQueryParams
   } = {}) {
     const n = this._logger.create("createSignoutRequest"), o = await this.metadataService.getEndSessionEndpoint();
     if (!o)
       throw n.throw(new Error("No end session endpoint")), null;
     n.debug("Received end session endpoint", o);
-    const c = new Ke({
+    const l = new Ke({
       url: o,
       id_token_hint: t,
-      post_logout_redirect_uri: s,
+      post_logout_redirect_uri: r,
       state_data: e,
       extraQueryParams: i,
-      request_type: r
+      request_type: s
     });
     await this.clearStaleState();
-    const l = c.state;
-    return l && (n.debug("Signout request has state to persist"), await this.settings.stateStore.set(l.id, l.toStorageString())), c;
+    const c = l.state;
+    return c && (n.debug("Signout request has state to persist"), await this.settings.stateStore.set(c.id, c.toStorageString())), l;
   }
   async readSignoutResponseState(e, t = !1) {
-    const r = this._logger.create("readSignoutResponseState"), s = new Ve(J.readParams(e, this.settings.response_mode));
-    if (!s.state) {
-      if (r.debug("No state in response"), s.error)
-        throw r.warn("Response was error:", s.error), new M(s);
-      return { state: void 0, response: s };
+    const s = this._logger.create("readSignoutResponseState"), r = new Ve(G.readParams(e, this.settings.response_mode));
+    if (!r.state) {
+      if (s.debug("No state in response"), r.error)
+        throw s.warn("Response was error:", r.error), new M(r);
+      return { state: void 0, response: r };
     }
-    const i = await this.settings.stateStore[t ? "remove" : "get"](s.state);
+    const i = await this.settings.stateStore[t ? "remove" : "get"](r.state);
     if (!i)
-      throw r.throw(new Error("No matching state found in storage")), null;
-    return { state: H.fromStorageString(i), response: s };
+      throw s.throw(new Error("No matching state found in storage")), null;
+    return { state: H.fromStorageString(i), response: r };
   }
   async processSignoutResponse(e) {
-    const t = this._logger.create("processSignoutResponse"), { state: r, response: s } = await this.readSignoutResponseState(e, !0);
-    return r ? (t.debug("Received state from storage; validating response"), this._validator.validateSignoutResponse(s, r)) : t.debug("No state from storage; skipping response validation"), s;
+    const t = this._logger.create("processSignoutResponse"), { state: s, response: r } = await this.readSignoutResponseState(e, !0);
+    return s ? (t.debug("Received state from storage; validating response"), this._validator.validateSignoutResponse(r, s)) : t.debug("No state from storage; skipping response validation"), r;
   }
   clearStaleState() {
     return this._logger.create("clearStaleState"), H.clearStaleState(this.settings.stateStore, this.settings.staleStateAgeInSeconds);
@@ -1301,55 +1345,55 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
 }, Qe = class {
   constructor(e) {
     this._userManager = e, this._logger = new f("SessionMonitor"), this._start = async (t) => {
-      const r = t.session_state;
-      if (!r)
+      const s = t.session_state;
+      if (!s)
         return;
-      const s = this._logger.create("_start");
-      if (t.profile ? (this._sub = t.profile.sub, this._sid = t.profile.sid, s.debug("session_state", r, ", sub", this._sub)) : (this._sub = void 0, this._sid = void 0, s.debug("session_state", r, ", anonymous user")), this._checkSessionIFrame) {
-        this._checkSessionIFrame.start(r);
+      const r = this._logger.create("_start");
+      if (t.profile ? (this._sub = t.profile.sub, this._sid = t.profile.sid, r.debug("session_state", s, ", sub", this._sub)) : (this._sub = void 0, this._sid = void 0, r.debug("session_state", s, ", anonymous user")), this._checkSessionIFrame) {
+        this._checkSessionIFrame.start(s);
         return;
       }
       try {
         const i = await this._userManager.metadataService.getCheckSessionIframe();
         if (i) {
-          s.debug("initializing check session iframe");
-          const n = this._userManager.settings.client_id, o = this._userManager.settings.checkSessionIntervalInSeconds, c = this._userManager.settings.stopCheckSessionOnError, l = new Ne(this._callback, n, i, o, c);
-          await l.load(), this._checkSessionIFrame = l, l.start(r);
+          r.debug("initializing check session iframe");
+          const n = this._userManager.settings.client_id, o = this._userManager.settings.checkSessionIntervalInSeconds, l = this._userManager.settings.stopCheckSessionOnError, c = new qe(this._callback, n, i, o, l);
+          await c.load(), this._checkSessionIFrame = c, c.start(s);
         } else
-          s.warn("no check session iframe found in the metadata");
+          r.warn("no check session iframe found in the metadata");
       } catch (i) {
-        s.error("Error from getCheckSessionIframe:", i instanceof Error ? i.message : i);
+        r.error("Error from getCheckSessionIframe:", i instanceof Error ? i.message : i);
       }
     }, this._stop = () => {
       const t = this._logger.create("_stop");
       if (this._sub = void 0, this._sid = void 0, this._checkSessionIFrame && this._checkSessionIFrame.stop(), this._userManager.settings.monitorAnonymousSession) {
-        const r = setInterval(async () => {
-          clearInterval(r);
+        const s = setInterval(async () => {
+          clearInterval(s);
           try {
-            const s = await this._userManager.querySessionStatus();
-            if (s) {
+            const r = await this._userManager.querySessionStatus();
+            if (r) {
               const i = {
-                session_state: s.session_state,
-                profile: s.sub && s.sid ? {
-                  sub: s.sub,
-                  sid: s.sid
+                session_state: r.session_state,
+                profile: r.sub && r.sid ? {
+                  sub: r.sub,
+                  sid: r.sid
                 } : null
               };
               this._start(i);
             }
-          } catch (s) {
-            t.error("error from querySessionStatus", s instanceof Error ? s.message : s);
+          } catch (r) {
+            t.error("error from querySessionStatus", r instanceof Error ? r.message : r);
           }
         }, 1e3);
       }
     }, this._callback = async () => {
       const t = this._logger.create("_callback");
       try {
-        const r = await this._userManager.querySessionStatus();
-        let s = !0;
-        r && this._checkSessionIFrame ? r.sub === this._sub ? (s = !1, this._checkSessionIFrame.start(r.session_state), r.sid === this._sid ? t.debug("same sub still logged in at OP, restarting check session iframe; session_state", r.session_state) : (t.debug("same sub still logged in at OP, session state has changed, restarting check session iframe; session_state", r.session_state), this._userManager.events._raiseUserSessionChanged())) : t.debug("different subject signed into OP", r.sub) : t.debug("subject no longer signed into OP"), s ? this._sub ? this._userManager.events._raiseUserSignedOut() : this._userManager.events._raiseUserSignedIn() : t.debug("no change in session detected, no event to raise");
-      } catch (r) {
-        this._sub && (t.debug("Error calling queryCurrentSigninSession; raising signed out event", r), this._userManager.events._raiseUserSignedOut());
+        const s = await this._userManager.querySessionStatus();
+        let r = !0;
+        s && this._checkSessionIFrame ? s.sub === this._sub ? (r = !1, this._checkSessionIFrame.start(s.session_state), s.sid === this._sid ? t.debug("same sub still logged in at OP, restarting check session iframe; session_state", s.session_state) : (t.debug("same sub still logged in at OP, session state has changed, restarting check session iframe; session_state", s.session_state), this._userManager.events._raiseUserSessionChanged())) : t.debug("different subject signed into OP", s.sub) : t.debug("subject no longer signed into OP"), r ? this._sub ? this._userManager.events._raiseUserSignedOut() : this._userManager.events._raiseUserSignedIn() : t.debug("no change in session detected, no event to raise");
+      } catch (s) {
+        this._sub && (t.debug("Error calling queryCurrentSigninSession; raising signed out event", s), this._userManager.events._raiseUserSignedOut());
       }
     }, e || this._logger.throw(new Error("No user manager passed")), this._userManager.events.addUserLoaded(this._start), this._userManager.events.addUserUnloaded(this._stop), this._init().catch((t) => {
       this._logger.error(t);
@@ -1363,14 +1407,14 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     else if (this._userManager.settings.monitorAnonymousSession) {
       const t = await this._userManager.querySessionStatus();
       if (t) {
-        const r = {
+        const s = {
           session_state: t.session_state,
           profile: t.sub && t.sid ? {
             sub: t.sub,
             sid: t.sid
           } : null
         };
-        this._start(r);
+        this._start(s);
       }
     }
   }
@@ -1381,10 +1425,10 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   }
   get expires_in() {
     if (this.expires_at !== void 0)
-      return this.expires_at - R.getEpochTime();
+      return this.expires_at - x.getEpochTime();
   }
   set expires_in(e) {
-    e !== void 0 && (this.expires_at = Math.floor(e) + R.getEpochTime());
+    e !== void 0 && (this.expires_at = Math.floor(e) + x.getEpochTime());
   }
   get expired() {
     const e = this.expires_in;
@@ -1410,23 +1454,23 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   static fromStorageString(e) {
     return f.createStatic("User", "fromStorageString"), new j(JSON.parse(e));
   }
-}, se = "oidc-client", ue = class {
+}, ne = "oidc-client", pe = class {
   constructor() {
-    this._abort = new A("Window navigation aborted"), this._disposeHandlers = /* @__PURE__ */ new Set(), this._window = null;
+    this._abort = new q("Window navigation aborted"), this._disposeHandlers = /* @__PURE__ */ new Set(), this._window = null;
   }
   async navigate(e) {
     const t = this._logger.create("navigate");
     if (!this._window)
       throw new Error("Attempted to navigate on a disposed window");
     t.debug("setting URL in window"), this._window.location.replace(e.url);
-    const { url: r, keepOpen: s } = await new Promise((i, n) => {
-      const o = (c) => {
-        var l;
-        const u = c.data, p = (l = e.scriptOrigin) != null ? l : window.location.origin;
-        if (!(c.origin !== p || (u == null ? void 0 : u.source) !== se)) {
+    const { url: s, keepOpen: r } = await new Promise((i, n) => {
+      const o = (l) => {
+        var c;
+        const u = l.data, _ = (c = e.scriptOrigin) != null ? c : window.location.origin;
+        if (!(l.origin !== _ || (u == null ? void 0 : u.source) !== ne)) {
           try {
-            const g = J.readParams(u.url, e.response_mode).get("state");
-            if (g || t.warn("no state found in response url"), c.source !== this._window && g !== e.state)
+            const g = G.readParams(u.url, e.response_mode).get("state");
+            if (g || t.warn("no state found in response url"), l.source !== this._window && g !== e.state)
               return;
           } catch {
             this._dispose(), n(new Error("Invalid response from window"));
@@ -1434,11 +1478,11 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
           i(u);
         }
       };
-      window.addEventListener("message", o, !1), this._disposeHandlers.add(() => window.removeEventListener("message", o, !1)), this._disposeHandlers.add(this._abort.addHandler((c) => {
-        this._dispose(), n(c);
+      window.addEventListener("message", o, !1), this._disposeHandlers.add(() => window.removeEventListener("message", o, !1)), this._disposeHandlers.add(this._abort.addHandler((l) => {
+        this._dispose(), n(l);
       }));
     });
-    return t.debug("got response from window"), this._dispose(), s || this.close(), { url: r };
+    return t.debug("got response from window"), this._dispose(), r || this.close(), { url: s };
   }
   _dispose() {
     this._logger.create("_dispose");
@@ -1446,30 +1490,30 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
       e();
     this._disposeHandlers.clear();
   }
-  static _notifyParent(e, t, r = !1, s = window.location.origin) {
+  static _notifyParent(e, t, s = !1, r = window.location.origin) {
     e.postMessage({
-      source: se,
+      source: ne,
       url: t,
-      keepOpen: r
-    }, s);
+      keepOpen: s
+    }, r);
   }
-}, _e = {
+}, fe = {
   location: !1,
   toolbar: !1,
   height: 640
-}, pe = "_blank", Xe = 60, Ye = 2, fe = 10, Ze = class extends he {
+}, we = "_blank", Xe = 60, Ye = 2, me = 10, Ze = class extends ue {
   constructor(e) {
     const {
       popup_redirect_uri: t = e.redirect_uri,
-      popup_post_logout_redirect_uri: r = e.post_logout_redirect_uri,
-      popupWindowFeatures: s = _e,
-      popupWindowTarget: i = pe,
+      popup_post_logout_redirect_uri: s = e.post_logout_redirect_uri,
+      popupWindowFeatures: r = fe,
+      popupWindowTarget: i = we,
       redirectMethod: n = "assign",
       redirectTarget: o = "self",
-      iframeNotifyParentOrigin: c = e.iframeNotifyParentOrigin,
-      iframeScriptOrigin: l = e.iframeScriptOrigin,
+      iframeNotifyParentOrigin: l = e.iframeNotifyParentOrigin,
+      iframeScriptOrigin: c = e.iframeScriptOrigin,
       silent_redirect_uri: u = e.redirect_uri,
-      silentRequestTimeoutInSeconds: p = fe,
+      silentRequestTimeoutInSeconds: _ = me,
       automaticSilentRenew: g = !0,
       validateSubOnSilentRenew: S = !0,
       includeIdTokenInSilentRenew: w = !1,
@@ -1479,22 +1523,23 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
       query_status_response_type: E = "code",
       stopCheckSessionOnError: a = !0,
       revokeTokenTypes: d = ["access_token", "refresh_token"],
-      revokeTokensOnSignout: _ = !1,
-      accessTokenExpiringNotificationTimeInSeconds: m = Xe,
-      userStore: y
+      revokeTokensOnSignout: p = !1,
+      includeIdTokenInSilentSignout: m = !1,
+      accessTokenExpiringNotificationTimeInSeconds: y = Xe,
+      userStore: k
     } = e;
-    if (super(e), this.popup_redirect_uri = t, this.popup_post_logout_redirect_uri = r, this.popupWindowFeatures = s, this.popupWindowTarget = i, this.redirectMethod = n, this.redirectTarget = o, this.iframeNotifyParentOrigin = c, this.iframeScriptOrigin = l, this.silent_redirect_uri = u, this.silentRequestTimeoutInSeconds = p, this.automaticSilentRenew = g, this.validateSubOnSilentRenew = S, this.includeIdTokenInSilentRenew = w, this.monitorSession = b, this.monitorAnonymousSession = h, this.checkSessionIntervalInSeconds = v, this.stopCheckSessionOnError = a, this.query_status_response_type = E, this.revokeTokenTypes = d, this.revokeTokensOnSignout = _, this.accessTokenExpiringNotificationTimeInSeconds = m, y)
-      this.userStore = y;
+    if (super(e), this.popup_redirect_uri = t, this.popup_post_logout_redirect_uri = s, this.popupWindowFeatures = r, this.popupWindowTarget = i, this.redirectMethod = n, this.redirectTarget = o, this.iframeNotifyParentOrigin = l, this.iframeScriptOrigin = c, this.silent_redirect_uri = u, this.silentRequestTimeoutInSeconds = _, this.automaticSilentRenew = g, this.validateSubOnSilentRenew = S, this.includeIdTokenInSilentRenew = w, this.monitorSession = b, this.monitorAnonymousSession = h, this.checkSessionIntervalInSeconds = v, this.stopCheckSessionOnError = a, this.query_status_response_type = E, this.revokeTokenTypes = d, this.revokeTokensOnSignout = p, this.includeIdTokenInSilentSignout = m, this.accessTokenExpiringNotificationTimeInSeconds = y, k)
+      this.userStore = k;
     else {
-      const k = typeof window < "u" ? window.sessionStorage : new le();
-      this.userStore = new de({ store: k });
+      const T = typeof window < "u" ? window.sessionStorage : new he();
+      this.userStore = new ge({ store: T });
     }
   }
-}, K = class extends ue {
+}, Q = class extends pe {
   constructor({
-    silentRequestTimeoutInSeconds: e = fe
+    silentRequestTimeoutInSeconds: e = me
   }) {
-    super(), this._logger = new f("IFrameWindow"), this._timeoutInSeconds = e, this._frame = K.createHiddenIframe(), this._window = this._frame.contentWindow;
+    super(), this._logger = new f("IFrameWindow"), this._timeoutInSeconds = e, this._frame = Q.createHiddenIframe(), this._window = this._frame.contentWindow;
   }
   static createHiddenIframe() {
     const e = window.document.createElement("iframe");
@@ -1502,15 +1547,15 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   }
   async navigate(e) {
     this._logger.debug("navigate: Using timeout of:", this._timeoutInSeconds);
-    const t = setTimeout(() => this._abort.raise(new V("IFrame timed out without a response")), this._timeoutInSeconds * 1e3);
+    const t = setTimeout(() => this._abort.raise(new X("IFrame timed out without a response")), this._timeoutInSeconds * 1e3);
     return this._disposeHandlers.add(() => clearTimeout(t)), await super.navigate(e);
   }
   close() {
     var e;
     this._frame && (this._frame.parentNode && (this._frame.addEventListener("load", (t) => {
-      var r;
-      const s = t.target;
-      (r = s.parentNode) == null || r.removeChild(s), this._abort.raise(new Error("IFrame removed from DOM"));
+      var s;
+      const r = t.target;
+      (s = r.parentNode) == null || s.removeChild(r), this._abort.raise(new Error("IFrame removed from DOM"));
     }, !0), (e = this._frame.contentWindow) == null || e.location.replace("about:blank")), this._frame = null), this._window = null;
   }
   static notifyParent(e, t) {
@@ -1523,27 +1568,27 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   async prepare({
     silentRequestTimeoutInSeconds: e = this._settings.silentRequestTimeoutInSeconds
   }) {
-    return new K({ silentRequestTimeoutInSeconds: e });
+    return new Q({ silentRequestTimeoutInSeconds: e });
   }
   async callback(e) {
-    this._logger.create("callback"), K.notifyParent(e, this._settings.iframeNotifyParentOrigin);
+    this._logger.create("callback"), Q.notifyParent(e, this._settings.iframeNotifyParentOrigin);
   }
-}, tt = 500, ie = class extends ue {
+}, tt = 500, oe = class extends pe {
   constructor({
-    popupWindowTarget: e = pe,
+    popupWindowTarget: e = we,
     popupWindowFeatures: t = {}
   }) {
     super(), this._logger = new f("PopupWindow");
-    const r = te.center({ ..._e, ...t });
-    this._window = window.open(void 0, e, te.serialize(r));
+    const s = ie.center({ ...fe, ...t });
+    this._window = window.open(void 0, e, ie.serialize(s));
   }
   async navigate(e) {
     var t;
     (t = this._window) == null || t.focus();
-    const r = setInterval(() => {
+    const s = setInterval(() => {
       (!this._window || this._window.closed) && this._abort.raise(new Error("Popup closed by user"));
     }, tt);
-    return this._disposeHandlers.add(() => clearInterval(r)), await super.navigate(e);
+    return this._disposeHandlers.add(() => clearInterval(s)), await super.navigate(e);
   }
   close() {
     this._window && (this._window.closed || (this._window.close(), this._abort.raise(new Error("Popup closed")))), this._window = null;
@@ -1553,7 +1598,7 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
       throw new Error("No window.opener. Can't complete notification.");
     return super._notifyParent(window.opener, e, t);
   }
-}, rt = class {
+}, st = class {
   constructor(e) {
     this._settings = e, this._logger = new f("PopupNavigator");
   }
@@ -1561,12 +1606,12 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     popupWindowFeatures: e = this._settings.popupWindowFeatures,
     popupWindowTarget: t = this._settings.popupWindowTarget
   }) {
-    return new ie({ popupWindowFeatures: e, popupWindowTarget: t });
+    return new oe({ popupWindowFeatures: e, popupWindowTarget: t });
   }
   async callback(e, t = !1) {
-    this._logger.create("callback"), ie.notifyOpener(e, t);
+    this._logger.create("callback"), oe.notifyOpener(e, t);
   }
-}, st = class {
+}, rt = class {
   constructor(e) {
     this._settings = e, this._logger = new f("RedirectNavigator");
   }
@@ -1574,28 +1619,28 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     redirectMethod: e = this._settings.redirectMethod,
     redirectTarget: t = this._settings.redirectTarget
   }) {
-    var r;
+    var s;
     this._logger.create("prepare");
-    let s = window.self;
-    t === "top" && (s = (r = window.top) != null ? r : window.self);
-    const i = s.location[e].bind(s.location);
+    let r = window.self;
+    t === "top" && (r = (s = window.top) != null ? s : window.self);
+    const i = r.location[e].bind(r.location);
     let n;
     return {
       navigate: async (o) => {
         this._logger.create("navigate");
-        const c = new Promise((l, u) => {
+        const l = new Promise((c, u) => {
           n = u;
         });
-        return i(o.url), await c;
+        return i(o.url), await l;
       },
       close: () => {
-        this._logger.create("close"), n == null || n(new Error("Redirect aborted")), s.stop();
+        this._logger.create("close"), n == null || n(new Error("Redirect aborted")), r.stop();
       }
     };
   }
 }, it = class extends Ae {
   constructor(e) {
-    super({ expiringNotificationTimeInSeconds: e.accessTokenExpiringNotificationTimeInSeconds }), this._logger = new f("UserManagerEvents"), this._userLoaded = new A("User loaded"), this._userUnloaded = new A("User unloaded"), this._silentRenewError = new A("Silent renew error"), this._userSignedIn = new A("User signed in"), this._userSignedOut = new A("User signed out"), this._userSessionChanged = new A("User session changed");
+    super({ expiringNotificationTimeInSeconds: e.accessTokenExpiringNotificationTimeInSeconds }), this._logger = new f("UserManagerEvents"), this._userLoaded = new q("User loaded"), this._userUnloaded = new q("User unloaded"), this._silentRenewError = new q("Silent renew error"), this._userSignedIn = new q("User signed in"), this._userSignedOut = new q("User signed out"), this._userSessionChanged = new q("User session changed");
   }
   load(e, t = !0) {
     super.load(e), t && this._userLoaded.raise(e);
@@ -1653,16 +1698,16 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   }
 }, nt = class {
   constructor(e) {
-    this._userManager = e, this._logger = new f("SilentRenewService"), this._isStarted = !1, this._retryTimer = new R("Retry Silent Renew"), this._tokenExpiring = async () => {
+    this._userManager = e, this._logger = new f("SilentRenewService"), this._isStarted = !1, this._retryTimer = new x("Retry Silent Renew"), this._tokenExpiring = async () => {
       const t = this._logger.create("_tokenExpiring");
       try {
         await this._userManager.signinSilent(), t.debug("silent token renewal successful");
-      } catch (r) {
-        if (r instanceof V) {
-          t.warn("ErrorTimeout from signinSilent:", r, "retry in 5s"), this._retryTimer.init(5);
+      } catch (s) {
+        if (s instanceof X) {
+          t.warn("ErrorTimeout from signinSilent:", s, "retry in 5s"), this._retryTimer.init(5);
           return;
         }
-        t.error("Error from signinSilent:", r), this._userManager.events._raiseSilentRenewError(r);
+        t.error("Error from signinSilent:", s), this._userManager.events._raiseSilentRenewError(s);
       }
     };
   }
@@ -1682,11 +1727,11 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   }
 }, ot = class {
   constructor(e) {
-    this.refresh_token = e.refresh_token, this.id_token = e.id_token, this.session_state = e.session_state, this.scope = e.scope, this.data = e.state;
+    this.refresh_token = e.refresh_token, this.id_token = e.id_token, this.session_state = e.session_state, this.scope = e.scope, this.profile = e.profile, this.data = e.state;
   }
 }, at = class {
   constructor(e) {
-    this._logger = new f("UserManager"), this.settings = new Ze(e), this._client = new Ge(e), this._redirectNavigator = new st(this.settings), this._popupNavigator = new rt(this.settings), this._iframeNavigator = new et(this.settings), this._events = new it(this.settings), this._silentRenewService = new nt(this), this.settings.automaticSilentRenew && this.startSilentRenew(), this._sessionMonitor = null, this.settings.monitorSession && (this._sessionMonitor = new Qe(this));
+    this._logger = new f("UserManager"), this.settings = new Ze(e), this._client = new Ge(e), this._redirectNavigator = new rt(this.settings), this._popupNavigator = new st(this.settings), this._iframeNavigator = new et(this.settings), this._events = new it(this.settings), this._silentRenewService = new nt(this), this.settings.automaticSilentRenew && this.startSilentRenew(), this._sessionMonitor = null, this.settings.monitorSession && (this._sessionMonitor = new Qe(this));
   }
   get events() {
     return this._events;
@@ -1706,67 +1751,77 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     this._logger.create("signinRedirect");
     const {
       redirectMethod: t,
-      ...r
-    } = e, s = await this._redirectNavigator.prepare({ redirectMethod: t });
+      ...s
+    } = e, r = await this._redirectNavigator.prepare({ redirectMethod: t });
     await this._signinStart({
       request_type: "si:r",
-      ...r
-    }, s);
+      ...s
+    }, r);
   }
   async signinRedirectCallback(e = window.location.href) {
-    const t = this._logger.create("signinRedirectCallback"), r = await this._signinEnd(e);
-    return r.profile && r.profile.sub ? t.info("success, signed in subject", r.profile.sub) : t.info("no subject"), r;
+    const t = this._logger.create("signinRedirectCallback"), s = await this._signinEnd(e);
+    return s.profile && s.profile.sub ? t.info("success, signed in subject", s.profile.sub) : t.info("no subject"), s;
+  }
+  async signinResourceOwnerCredentials({
+    username: e,
+    password: t,
+    skipUserInfo: s = !1
+  }) {
+    const r = this._logger.create("signinResourceOwnerCredential"), i = await this._client.processResourceOwnerPasswordCredentials({ username: e, password: t, skipUserInfo: s });
+    r.debug("got signin response");
+    const n = await this._buildUser(i);
+    return n.profile && n.profile.sub ? r.info("success, signed in subject", n.profile.sub) : r.info("no subject"), n;
   }
   async signinPopup(e = {}) {
     const t = this._logger.create("signinPopup"), {
-      popupWindowFeatures: r,
-      popupWindowTarget: s,
+      popupWindowFeatures: s,
+      popupWindowTarget: r,
       ...i
     } = e, n = this.settings.popup_redirect_uri;
     n || t.throw(new Error("No popup_redirect_uri configured"));
-    const o = await this._popupNavigator.prepare({ popupWindowFeatures: r, popupWindowTarget: s }), c = await this._signin({
+    const o = await this._popupNavigator.prepare({ popupWindowFeatures: s, popupWindowTarget: r }), l = await this._signin({
       request_type: "si:p",
       redirect_uri: n,
       display: "popup",
       ...i
     }, o);
-    return c && (c.profile && c.profile.sub ? t.info("success, signed in subject", c.profile.sub) : t.info("no subject")), c;
+    return l && (l.profile && l.profile.sub ? t.info("success, signed in subject", l.profile.sub) : t.info("no subject")), l;
   }
   async signinPopupCallback(e = window.location.href, t = !1) {
-    const r = this._logger.create("signinPopupCallback");
-    await this._popupNavigator.callback(e, t), r.info("success");
+    const s = this._logger.create("signinPopupCallback");
+    await this._popupNavigator.callback(e, t), s.info("success");
   }
   async signinSilent(e = {}) {
     var t;
-    const r = this._logger.create("signinSilent"), {
-      silentRequestTimeoutInSeconds: s,
+    const s = this._logger.create("signinSilent"), {
+      silentRequestTimeoutInSeconds: r,
       ...i
     } = e;
     let n = await this._loadUser();
     if (n != null && n.refresh_token) {
-      r.debug("using refresh token");
+      s.debug("using refresh token");
       const u = new ot(n);
       return await this._useRefreshToken(u);
     }
     const o = this.settings.silent_redirect_uri;
-    o || r.throw(new Error("No silent_redirect_uri configured"));
-    let c;
-    n && this.settings.validateSubOnSilentRenew && (r.debug("subject prior to silent renew:", n.profile.sub), c = n.profile.sub);
-    const l = await this._iframeNavigator.prepare({ silentRequestTimeoutInSeconds: s });
+    o || s.throw(new Error("No silent_redirect_uri configured"));
+    let l;
+    n && this.settings.validateSubOnSilentRenew && (s.debug("subject prior to silent renew:", n.profile.sub), l = n.profile.sub);
+    const c = await this._iframeNavigator.prepare({ silentRequestTimeoutInSeconds: r });
     return n = await this._signin({
       request_type: "si:s",
       redirect_uri: o,
       prompt: "none",
       id_token_hint: this.settings.includeIdTokenInSilentRenew ? n == null ? void 0 : n.id_token : void 0,
       ...i
-    }, l, c), n && ((t = n.profile) != null && t.sub ? r.info("success, signed in subject", n.profile.sub) : r.info("no subject")), n;
+    }, c, l), n && ((t = n.profile) != null && t.sub ? s.info("success, signed in subject", n.profile.sub) : s.info("no subject")), n;
   }
   async _useRefreshToken(e) {
     const t = await this._client.useRefreshToken({
       state: e,
       timeoutInSeconds: this.settings.silentRequestTimeoutInSeconds
-    }), r = new j({ ...e, ...t });
-    return await this.storeUser(r), this._events.load(r), r;
+    }), s = new j({ ...e, ...t });
+    return await this.storeUser(s), this._events.load(s), s;
   }
   async signinSilentCallback(e = window.location.href) {
     const t = this._logger.create("signinSilentCallback");
@@ -1786,14 +1841,17 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     }
   }
   async signoutCallback(e = window.location.href, t = !1) {
-    const { state: r } = await this._client.readSignoutResponseState(e);
-    if (!!r)
-      switch (r.request_type) {
+    const { state: s } = await this._client.readSignoutResponseState(e);
+    if (!!s)
+      switch (s.request_type) {
         case "so:r":
           await this.signoutRedirectCallback(e);
           break;
         case "so:p":
           await this.signoutPopupCallback(e, t);
+          break;
+        case "so:s":
+          await this.signoutSilentCallback(e);
           break;
         default:
           throw new Error("invalid response_type in state");
@@ -1801,11 +1859,11 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
   }
   async querySessionStatus(e = {}) {
     const t = this._logger.create("querySessionStatus"), {
-      silentRequestTimeoutInSeconds: r,
-      ...s
+      silentRequestTimeoutInSeconds: s,
+      ...r
     } = e, i = this.settings.silent_redirect_uri;
     i || t.throw(new Error("No silent_redirect_uri configured"));
-    const n = await this._loadUser(), o = await this._iframeNavigator.prepare({ silentRequestTimeoutInSeconds: r }), c = await this._signinStart({
+    const n = await this._loadUser(), o = await this._iframeNavigator.prepare({ silentRequestTimeoutInSeconds: s }), l = await this._signinStart({
       request_type: "si:s",
       redirect_uri: i,
       prompt: "none",
@@ -1813,79 +1871,81 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
       response_type: this.settings.query_status_response_type,
       scope: "openid",
       skipUserInfo: !0,
-      ...s
+      ...r
     }, o);
     try {
-      const l = await this._client.processSigninResponse(c.url);
-      return t.debug("got signin response"), l.session_state && l.profile.sub ? (t.info("success for subject", l.profile.sub), {
-        session_state: l.session_state,
-        sub: l.profile.sub,
-        sid: l.profile.sid
+      const c = await this._client.processSigninResponse(l.url);
+      return t.debug("got signin response"), c.session_state && c.profile.sub ? (t.info("success for subject", c.profile.sub), {
+        session_state: c.session_state,
+        sub: c.profile.sub,
+        sid: c.profile.sid
       }) : (t.info("success, user not authenticated"), null);
-    } catch (l) {
-      if (this.settings.monitorAnonymousSession && l instanceof M)
-        switch (l.error) {
+    } catch (c) {
+      if (this.settings.monitorAnonymousSession && c instanceof M)
+        switch (c.error) {
           case "login_required":
           case "consent_required":
           case "interaction_required":
           case "account_selection_required":
             return t.info("success for anonymous user"), {
-              session_state: l.session_state
+              session_state: c.session_state
             };
         }
-      throw l;
+      throw c;
     }
   }
-  async _signin(e, t, r) {
-    const s = await this._signinStart(e, t);
-    return await this._signinEnd(s.url, r);
+  async _signin(e, t, s) {
+    const r = await this._signinStart(e, t);
+    return await this._signinEnd(r.url, s);
   }
   async _signinStart(e, t) {
-    const r = this._logger.create("_signinStart");
+    const s = this._logger.create("_signinStart");
     try {
-      const s = await this._client.createSigninRequest(e);
-      return r.debug("got signin request"), await t.navigate({
-        url: s.url,
-        state: s.state.id,
-        response_mode: s.state.response_mode,
+      const r = await this._client.createSigninRequest(e);
+      return s.debug("got signin request"), await t.navigate({
+        url: r.url,
+        state: r.state.id,
+        response_mode: r.state.response_mode,
         scriptOrigin: this.settings.iframeScriptOrigin
       });
-    } catch (s) {
-      throw r.debug("error after preparing navigator, closing navigator window"), t.close(), s;
+    } catch (r) {
+      throw s.debug("error after preparing navigator, closing navigator window"), t.close(), r;
     }
   }
   async _signinEnd(e, t) {
-    const r = this._logger.create("_signinEnd"), s = await this._client.processSigninResponse(e);
-    r.debug("got signin response");
-    const i = new j(s);
+    const s = this._logger.create("_signinEnd"), r = await this._client.processSigninResponse(e);
+    return s.debug("got signin response"), await this._buildUser(r, t);
+  }
+  async _buildUser(e, t) {
+    const s = this._logger.create("_buildUser"), r = new j(e);
     if (t) {
-      if (t !== i.profile.sub)
-        throw r.debug("current user does not match user returned from signin. sub from signin:", i.profile.sub), new M({ ...s, error: "login_required" });
-      r.debug("current user matches user returned from signin");
+      if (t !== r.profile.sub)
+        throw s.debug("current user does not match user returned from signin. sub from signin:", r.profile.sub), new M({ ...e, error: "login_required" });
+      s.debug("current user matches user returned from signin");
     }
-    return await this.storeUser(i), r.debug("user stored"), this._events.load(i), i;
+    return await this.storeUser(r), s.debug("user stored"), this._events.load(r), r;
   }
   async signoutRedirect(e = {}) {
     const t = this._logger.create("signoutRedirect"), {
-      redirectMethod: r,
-      ...s
-    } = e, i = await this._redirectNavigator.prepare({ redirectMethod: r });
+      redirectMethod: s,
+      ...r
+    } = e, i = await this._redirectNavigator.prepare({ redirectMethod: s });
     await this._signoutStart({
       request_type: "so:r",
       post_logout_redirect_uri: this.settings.post_logout_redirect_uri,
-      ...s
+      ...r
     }, i), t.info("success");
   }
   async signoutRedirectCallback(e = window.location.href) {
-    const t = this._logger.create("signoutRedirectCallback"), r = await this._signoutEnd(e);
-    return t.info("success"), r;
+    const t = this._logger.create("signoutRedirectCallback"), s = await this._signoutEnd(e);
+    return t.info("success"), s;
   }
   async signoutPopup(e = {}) {
     const t = this._logger.create("signoutPopup"), {
-      popupWindowFeatures: r,
-      popupWindowTarget: s,
+      popupWindowFeatures: s,
+      popupWindowTarget: r,
       ...i
-    } = e, n = this.settings.popup_post_logout_redirect_uri, o = await this._popupNavigator.prepare({ popupWindowFeatures: r, popupWindowTarget: s });
+    } = e, n = this.settings.popup_post_logout_redirect_uri, o = await this._popupNavigator.prepare({ popupWindowFeatures: s, popupWindowTarget: r });
     await this._signout({
       request_type: "so:p",
       post_logout_redirect_uri: n,
@@ -1894,53 +1954,70 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     }, o), t.info("success");
   }
   async signoutPopupCallback(e = window.location.href, t = !1) {
-    const r = this._logger.create("signoutPopupCallback");
-    await this._popupNavigator.callback(e, t), r.info("success");
+    const s = this._logger.create("signoutPopupCallback");
+    await this._popupNavigator.callback(e, t), s.info("success");
   }
   async _signout(e, t) {
-    const r = await this._signoutStart(e, t);
-    return await this._signoutEnd(r.url);
+    const s = await this._signoutStart(e, t);
+    return await this._signoutEnd(s.url);
   }
   async _signoutStart(e = {}, t) {
-    var r;
-    const s = this._logger.create("_signoutStart");
+    var s;
+    const r = this._logger.create("_signoutStart");
     try {
       const i = await this._loadUser();
-      s.debug("loaded current user from storage"), this.settings.revokeTokensOnSignout && await this._revokeInternal(i);
+      r.debug("loaded current user from storage"), this.settings.revokeTokensOnSignout && await this._revokeInternal(i);
       const n = e.id_token_hint || i && i.id_token;
-      n && (s.debug("setting id_token_hint in signout request"), e.id_token_hint = n), await this.removeUser(), s.debug("user removed, creating signout request");
+      n && (r.debug("setting id_token_hint in signout request"), e.id_token_hint = n), await this.removeUser(), r.debug("user removed, creating signout request");
       const o = await this._client.createSignoutRequest(e);
-      return s.debug("got signout request"), await t.navigate({
+      return r.debug("got signout request"), await t.navigate({
         url: o.url,
-        state: (r = o.state) == null ? void 0 : r.id
+        state: (s = o.state) == null ? void 0 : s.id
       });
     } catch (i) {
-      throw s.debug("error after preparing navigator, closing navigator window"), t.close(), i;
+      throw r.debug("error after preparing navigator, closing navigator window"), t.close(), i;
     }
   }
   async _signoutEnd(e) {
-    const t = this._logger.create("_signoutEnd"), r = await this._client.processSignoutResponse(e);
-    return t.debug("got signout response"), r;
+    const t = this._logger.create("_signoutEnd"), s = await this._client.processSignoutResponse(e);
+    return t.debug("got signout response"), s;
+  }
+  async signoutSilent(e = {}) {
+    var t;
+    const s = this._logger.create("signoutSilent"), {
+      silentRequestTimeoutInSeconds: r,
+      ...i
+    } = e, n = this.settings.includeIdTokenInSilentSignout ? (t = await this._loadUser()) == null ? void 0 : t.id_token : void 0, o = this.settings.popup_post_logout_redirect_uri, l = await this._iframeNavigator.prepare({ silentRequestTimeoutInSeconds: r });
+    await this._signout({
+      request_type: "so:s",
+      post_logout_redirect_uri: o,
+      id_token_hint: n,
+      ...i
+    }, l), s.info("success");
+  }
+  async signoutSilentCallback(e = window.location.href) {
+    const t = this._logger.create("signoutSilentCallback");
+    await this._iframeNavigator.callback(e), t.info("success");
   }
   async revokeTokens(e) {
     const t = await this._loadUser();
     await this._revokeInternal(t, e);
   }
   async _revokeInternal(e, t = this.settings.revokeTokenTypes) {
-    const r = this._logger.create("_revokeInternal");
+    const s = this._logger.create("_revokeInternal");
     if (!e)
       return;
-    const s = t.filter((i) => typeof e[i] == "string");
-    if (!s.length) {
-      r.debug("no need to revoke due to no token(s)");
+    const r = t.filter((i) => typeof e[i] == "string");
+    if (!r.length) {
+      s.debug("no need to revoke due to no token(s)");
       return;
     }
-    for (const i of s)
+    for (const i of r)
       await this._client.revokeToken(
         e[i],
         i
-      ), r.info(`${i} revoked successfully`), i !== "access_token" && (e[i] = null);
-    await this.storeUser(e), r.debug("user stored"), this._events.load(e);
+      ), s.info(`${i} revoked successfully`), i !== "access_token" && (e[i] = null);
+    await this.storeUser(e), s.debug("user stored"), this._events.load(e);
   }
   startSilentRenew() {
     this._logger.create("startSilentRenew"), this._silentRenewService.start();
@@ -1959,16 +2036,16 @@ var Oe = "10000000-1000-4000-8000-100000000000", P = class {
     const t = this._logger.create("storeUser");
     if (e) {
       t.debug("storing user");
-      const r = e.toStorageString();
-      await this.settings.userStore.set(this._userStoreKey, r);
+      const s = e.toStorageString();
+      await this.settings.userStore.set(this._userStoreKey, s);
     } else
       this._logger.debug("removing user"), await this.settings.userStore.remove(this._userStoreKey);
   }
   async clearStaleState() {
     await this._client.clearStaleState();
   }
-}, ct = "2.0.6", _t = ct;
-const ne = (e, t) => (e || (e = []), t || (t = []), Array.isArray(e) || (e = e.split(" ")), Array.isArray(t) || (t = t.split(" ")), e.concat(t).filter((r, s, i) => i.indexOf(r) === s).join(" ").trim()), lt = "https://stage.identity.multicartshop.com", dt = "https://identity.multicartshop.com", ht = "Multicart.TypeScript.Client";
+}, ct = "2.2.0", _t = ct;
+const ae = (e, t) => (e || (e = []), t || (t = []), Array.isArray(e) || (e = e.split(" ")), Array.isArray(t) || (t = t.split(" ")), e.concat(t).filter((s, r, i) => i.indexOf(s) === r).join(" ").trim()), lt = "https://stage.identity.multicartshop.com", dt = "https://identity.multicartshop.com", ht = "Multicart.TypeScript.Client";
 class gt {
   constructor(t = {}) {
     this.configuration = t;
@@ -2001,42 +2078,33 @@ class gt {
 const ut = new gt();
 class pt extends at {
   constructor(t = ut) {
-    const r = {
+    const s = {
       authority: t.basePath,
       loadUserInfo: !0,
       client_id: t.client_id,
       redirect_uri: t.redirect_uri,
       post_logout_redirect_uri: t.logout_redirect_uri,
       client_secret: t.client_secret,
-      scope: ne(t.scopes)
+      scope: ae(t.scopes)
     };
-    super(r), this.configuration = t;
-  }
-  async signinPasswordGrant({
-    username: t,
-    password: r
-  }) {
-    const s = {
-      extraQueryParams: { username: t, password: r, grant_type: "password" }
-    };
-    return this.signinSilent(s);
+    super(s), this.configuration = t;
   }
   async signinClientCredentials({
     scopes: t
   } = {}) {
-    var l;
-    const r = this._logger.create("signinClientCredentials"), s = await this.metadataService.getTokenEndpoint().catch((u) => r.error(u));
-    if (!s)
+    var c;
+    const s = this._logger.create("signinClientCredentials"), r = await this.metadataService.getTokenEndpoint().catch((u) => s.error(u));
+    if (!r)
       throw new Error("Token endpoint not be empty");
     const {
       client_id: i,
       client_secret: n,
       scope: o
-    } = this.settings, c = ne(o, t);
+    } = this.settings, l = ae(o, t);
     if (!n)
       throw new Error("No client_secret configured");
     try {
-      const p = await (await fetch(s, {
+      const _ = await (await fetch(r, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -2045,43 +2113,43 @@ class pt extends at {
           grant_type: "client_credentials",
           client_id: i,
           client_secret: n,
-          scope: c
+          scope: l
         }).toString(),
         mode: "cors"
-      })).json(), g = new j(p);
-      return g.expires_at = Math.floor(Date.now() / 1e3) + ((l = p.expires_in) != null ? l : 0), await this.storeUser(g), r.debug("user stored"), this._events.load(g), g;
+      })).json(), g = new j(_);
+      return g.expires_at = Math.floor(Date.now() / 1e3) + ((c = _.expires_in) != null ? c : 0), await this.storeUser(g), s.debug("user stored"), this._events.load(g), g;
     } catch (u) {
-      throw r.error("Login failed", u), new Error("Login failed");
+      throw s.error("Login failed", u), new Error("Login failed");
     }
   }
 }
 export {
   Ae as AccessTokenEvents,
-  Ne as CheckSessionIFrame,
+  qe as CheckSessionIFrame,
   ut as DefaultMulticartOAuthConfig,
   M as ErrorResponse,
-  V as ErrorTimeout,
-  le as InMemoryWebStorage,
-  B as Log,
+  X as ErrorTimeout,
+  he as InMemoryWebStorage,
+  W as Log,
   f as Logger,
   dt as MULTICART_AUTH_PROD_PATH,
   lt as MULTICART_AUTH_SANDBOX_PATH,
   ht as MULTICART_CLIENT_ID,
-  qe as MetadataService,
+  Ne as MetadataService,
   pt as MulticartOAuthClient,
   gt as MulticartOAuthConfiguration,
   Ge as OidcClient,
-  he as OidcClientSettingsStore,
+  ue as OidcClientSettingsStore,
   Qe as SessionMonitor,
-  re as SigninResponse,
-  Q as SigninState,
+  J as SigninResponse,
+  Z as SigninState,
   Ve as SignoutResponse,
   H as State,
   j as User,
   at as UserManager,
   Ze as UserManagerSettingsStore,
   _t as Version,
-  de as WebStorageStateStore,
-  ne as mergeScopes
+  ge as WebStorageStateStore,
+  ae as mergeScopes
 };
 //# sourceMappingURL=cle-oidc-client.mjs.map

@@ -20,10 +20,6 @@ export declare const MULTICART_CLIENT_ID = "Multicart.TypeScript.Client";
 export declare class MulticartOAuthClient extends UserManager {
     protected configuration: MulticartOAuthConfiguration;
     constructor(configuration?: MulticartOAuthConfiguration);
-    signinPasswordGrant({ username, password, }: {
-        username: string;
-        password: string;
-    }): Promise<User | null>;
     signinClientCredentials({ scopes, }?: {
         scopes?: string[];
     }): Promise<User>;
